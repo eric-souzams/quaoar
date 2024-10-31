@@ -1,2 +1,3 @@
-# email-api
-📪 Mail sending microservice with Java, Springboot and PostgreSQL
+# Mail Send API
+
+Batch mailing with Java & Amazon SES.
