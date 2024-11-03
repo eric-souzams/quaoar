@@ -32,7 +32,8 @@ jobs:
       run: mvn -B package --file pom.xml -DskipTests
 
     - name: Tests with Junit
-      run: mvn test -Ptest
+      run: |
+        mvn test -Ptest
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
