@@ -1,3 +1,3 @@
-# Mail Send API
+# Quaoar
 
 Batch mailing with Java & Amazon SES.
