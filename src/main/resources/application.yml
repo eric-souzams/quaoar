@@ -11,7 +11,19 @@ spring:
     driverClassName: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
     hibernate:
       ddl-auto: update
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
+
+broker:
+  consumer:
+    queues:
+      delete-user: queue-delete-user
+      change-user: queue-changer-user-info
+      subscribe-topic: queue-subscribe-to-topic
+      unsubscribe-topics: queue-unsubscribe-from-topics
