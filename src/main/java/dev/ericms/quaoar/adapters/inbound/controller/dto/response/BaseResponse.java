@@ -1,13 +1,10 @@
 package dev.ericms.quaoar.adapters.inbound.controller.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
-import lombok.Data;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-@Builder
-@Data
 public class BaseResponse {
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -52,4 +49,27 @@ public class BaseResponse {
         return ResponseEntity.status(status.value()).body(baseResponse);
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 }
