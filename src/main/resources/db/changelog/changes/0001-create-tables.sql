@@ -17,7 +17,7 @@ create table tb_contacts (
 
 create table tb_messages (
     id uuid not null,
-    body TEXT not null,
+    content TEXT not null,
     created_at timestamp(6) not null,
     recipients varchar(255) not null,
     status varchar(255) not null check (status in ('DELIVER','OPEN','CLICK','BOUNCE','COMPLAINT','REJECT','SENT')),
