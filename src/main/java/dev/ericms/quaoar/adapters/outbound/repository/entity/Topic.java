@@ -1,5 +1,9 @@
 package dev.ericms.quaoar.adapters.outbound.repository.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -23,9 +27,13 @@ public class Topic {
     @Column(name = "integration_id", length = 150, nullable = false)
     private String integrationId;
 
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 

@@ -1,9 +1,9 @@
-create table tb_contact_topics (
+create table if not exists tb_contact_topics (
     contact_id uuid not null,
     topic_id uuid not null
 );
 
-create table tb_contacts (
+create table if not exists tb_contacts (
     id uuid not null,
     is_blocked boolean not null,
     created_at timestamp(6) not null,
@@ -15,7 +15,7 @@ create table tb_contacts (
     primary key (id)
 );
 
-create table tb_messages (
+create table if not exists tb_messages (
     id uuid not null,
     content TEXT not null,
     created_at timestamp(6) not null,
@@ -28,7 +28,7 @@ create table tb_messages (
     primary key (id)
 );
 
-create table tb_templates (
+create table if not exists tb_templates (
     id uuid not null,
     is_active boolean not null,
     content TEXT not null,
@@ -38,7 +38,7 @@ create table tb_templates (
     primary key (id)
 );
 
-create table tb_topics (
+create table if not exists tb_topics (
     id uuid not null,
     is_active boolean not null,
     created_at timestamp(6) not null,
