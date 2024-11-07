@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.config;
+package dev.ericms.quaoar.infrastructure.config.ses;
 
 import org.springframework.context.annotation.Configuration;
 

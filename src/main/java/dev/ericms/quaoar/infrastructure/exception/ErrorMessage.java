@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.adapters.inbound.exception;
+package dev.ericms.quaoar.infrastructure.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.servlet.http.HttpServletRequest;

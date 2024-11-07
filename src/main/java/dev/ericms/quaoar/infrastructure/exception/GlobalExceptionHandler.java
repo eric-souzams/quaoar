@@ -1,9 +1,9 @@
-package dev.ericms.quaoar.adapters.inbound.exception;
+package dev.ericms.quaoar.infrastructure.exception;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @ControllerAdvice
-public class ApiExceptionHandler {
+public class GlobalExceptionHandler {
 
 
 

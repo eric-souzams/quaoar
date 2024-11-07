@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.config;
+package dev.ericms.quaoar.infrastructure.config.rabbitmq;
 
 import org.springframework.context.annotation.Configuration;
 

@@ -1,7 +1,7 @@
-package dev.ericms.quaoar.config;
+package dev.ericms.quaoar.config.security;
 
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DatasourceConfig {
+public class SecurityConfig {
 }
