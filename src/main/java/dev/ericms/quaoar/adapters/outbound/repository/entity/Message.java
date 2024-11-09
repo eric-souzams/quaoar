@@ -24,8 +24,14 @@ public class Message {
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "recipients", nullable = false)
-    private String recipients;
+    @Column(name = "email_from", nullable = false)
+    private String emailFrom;
+
+    @Column(name = "recipients_to", nullable = false)
+    private String recipientsTo;
+
+    @Column(name = "recipients_cc", nullable = false)
+    private String recipientsCc;
 
     @ManyToOne
     @JoinColumn(name = "template_id", referencedColumnName = "id")
@@ -49,12 +55,14 @@ public class Message {
     @Column(name = "status", nullable = false)
     private MessageStatus status;
 
-    public Message(UUID id, String subject, String content, String recipients, Template template,
-                   Topic topic, LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status) {
+    public Message(UUID id, String subject, String content, String emailFrom, String recipientsTo, String recipientsCc,
+                   Template template, Topic topic, LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status) {
         this.id = id;
         this.subject = subject;
         this.content = content;
-        this.recipients = recipients;
+        this.emailFrom = emailFrom;
+        this.recipientsTo = recipientsTo;
+        this.recipientsCc = recipientsCc;
         this.template = template;
         this.topic = topic;
         this.createdAt = createdAt;
@@ -87,14 +95,6 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getRecipients() {
-        return recipients;
-    }
-
-    public void setRecipients(String recipients) {
-        this.recipients = recipients;
     }
 
     public Template getTemplate() {
@@ -137,4 +137,27 @@ public class Message {
         this.status = status;
     }
 
+    public String getEmailFrom() {
+        return emailFrom;
+    }
+
+    public void setEmailFrom(String emailFrom) {
+        this.emailFrom = emailFrom;
+    }
+
+    public String getRecipientsTo() {
+        return recipientsTo;
+    }
+
+    public void setRecipientsTo(String recipientsTo) {
+        this.recipientsTo = recipientsTo;
+    }
+
+    public String getRecipientsCc() {
+        return recipientsCc;
+    }
+
+    public void setRecipientsCc(String recipientsCc) {
+        this.recipientsCc = recipientsCc;
+    }
 }
