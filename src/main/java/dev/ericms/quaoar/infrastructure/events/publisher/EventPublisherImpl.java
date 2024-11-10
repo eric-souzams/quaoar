@@ -4,7 +4,6 @@ import dev.ericms.quaoar.application.core.event.interfaces.DomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.events.interfaces.EventPublisherStrategy;
 import dev.ericms.quaoar.infrastructure.events.registry.EventPublisherRegistry;
-import dev.ericms.quaoar.infrastructure.utils.Validation;
 import org.springframework.stereotype.Component;
 
 import static dev.ericms.quaoar.infrastructure.utils.Validation.isNotNull;
@@ -29,7 +28,6 @@ public class EventPublisherImpl implements EventPublisherOutboundPort {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private EventPublisherStrategy<? extends DomainEvent> getStrategy(DomainEvent event) {
         return registry.getStrategy(event.getClass());
     }
