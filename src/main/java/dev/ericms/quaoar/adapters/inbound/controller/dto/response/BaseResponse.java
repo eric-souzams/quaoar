@@ -13,10 +13,10 @@ public class BaseResponse {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private String message;
 
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String body;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Class<?> body;
 
-    public BaseResponse(HttpStatus status, String message, String body) {
+    public BaseResponse(HttpStatus status, String message, Class<?> body) {
         this.status = String.valueOf(status.value());
         this.message = message;
         this.body = body;
@@ -31,7 +31,7 @@ public class BaseResponse {
         this.status = String.valueOf(status.value());
     }
 
-    public static ResponseEntity<BaseResponse> createResponse(HttpStatus status, String message, String body) {
+    public static ResponseEntity<BaseResponse> createResponse(HttpStatus status, String message, Class<?> body) {
         BaseResponse baseResponse = new BaseResponse(status, message, body);
 
         return ResponseEntity.status(status.value()).body(baseResponse);
@@ -47,6 +47,38 @@ public class BaseResponse {
         BaseResponse baseResponse = new BaseResponse(status);
 
         return ResponseEntity.status(status.value()).body(baseResponse);
+    }
+
+    public static ResponseEntity<BaseResponse> createdResponse(String message) {
+        return createResponse(HttpStatus.CREATED, message);
+    }
+
+    public static ResponseEntity<BaseResponse> createdResponse() {
+        return createResponse(HttpStatus.CREATED);
+    }
+
+    public static ResponseEntity<BaseResponse> okResponse(String message) {
+        return createResponse(HttpStatus.OK, message);
+    }
+
+    public static ResponseEntity<BaseResponse> okResponse() {
+        return createResponse(HttpStatus.OK);
+    }
+
+    public static ResponseEntity<BaseResponse> deletedResponse() {
+        return createResponse(HttpStatus.NO_CONTENT);
+    }
+
+    public static ResponseEntity<BaseResponse> deletedResponse(String message) {
+        return createResponse(HttpStatus.NO_CONTENT, message);
+    }
+
+    public static ResponseEntity<BaseResponse> notFoundResponse() {
+        return createResponse(HttpStatus.NOT_FOUND);
+    }
+
+    public static ResponseEntity<BaseResponse> notFoundResponse(String message) {
+        return createResponse(HttpStatus.NOT_FOUND, message);
     }
 
     public String getStatus() {
@@ -65,11 +97,11 @@ public class BaseResponse {
         this.message = message;
     }
 
-    public String getBody() {
+    public Class<?> getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBody(Class<?> body) {
         this.body = body;
     }
 }
