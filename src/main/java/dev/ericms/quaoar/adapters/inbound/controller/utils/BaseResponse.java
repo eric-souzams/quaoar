@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.adapters.inbound.controller.dto.response;
+package dev.ericms.quaoar.adapters.inbound.controller.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

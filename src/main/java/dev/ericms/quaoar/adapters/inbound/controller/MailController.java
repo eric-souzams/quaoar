@@ -1,7 +1,7 @@
 package dev.ericms.quaoar.adapters.inbound.controller;
 
 import dev.ericms.quaoar.adapters.inbound.controller.dto.request.SendMailRequest;
-import dev.ericms.quaoar.adapters.inbound.controller.dto.response.BaseResponse;
+import dev.ericms.quaoar.adapters.inbound.controller.utils.BaseResponse;
 
 import jakarta.validation.Valid;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static dev.ericms.quaoar.adapters.inbound.controller.dto.response.BaseResponse.*;
+import static dev.ericms.quaoar.adapters.inbound.controller.utils.BaseResponse.*;
 import static dev.ericms.quaoar.adapters.inbound.controller.utils.Constants.MAIL_SENT_WITH_SUCCESS;
 
 @RestController
