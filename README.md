@@ -11,6 +11,7 @@
 - [AWS SES (Simple Email Service)](https://aws.amazon.com/pt/ses/)
 - [AWS SQS (Simple Queue Service)](https://aws.amazon.com/pt/sqs/)
 - [PostgreSQL 16](https://www.postgresql.org/download/)
+- [RabbitMQ](https://www.rabbitmq.com/)
 
 
 ## Features
@@ -20,6 +21,9 @@
 - [ ] D
 - [ ] E
 - [ ] F
+
+## Pending
+- [ ] Support AWS SQS messaging active option
 
 ## Setup
 
@@ -37,7 +41,8 @@ local | test | dev | qas | prod
 | DB_USERNAME    | Database username         |
 | DB_PASSWORD    | Database password         |
 | AWS_REGION     | AWS region                |
-| AWS_CREDENTIAL | AWS credential to connect |
+| AWS_ACCESS_KEY | AWS access key to connect |
+| AWS_SECRET_KEY | AWS secret key to connect |
 ```
 
 ### Running

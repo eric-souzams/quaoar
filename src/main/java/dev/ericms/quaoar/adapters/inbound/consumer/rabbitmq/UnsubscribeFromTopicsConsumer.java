@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.adapters.inbound.consumer;
+package dev.ericms.quaoar.adapters.inbound.consumer.rabbitmq;
 
 import org.springframework.stereotype.Component;
 
