@@ -16,7 +16,7 @@ public class SendMailRequest {
     private String subject;
 
     @NotBlank(message = "Content can't be empty")
-    private String content;
+    private String body;
 
     private List<@Email(message = "Email should be valid") String> recipients;
 
@@ -42,12 +42,12 @@ public class SendMailRequest {
         this.subject = subject;
     }
 
-    public String getContent() {
-        return content;
+    public String getBody() {
+        return body;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public List<String> getRecipients() {

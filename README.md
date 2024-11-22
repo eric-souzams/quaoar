@@ -15,15 +15,11 @@
 
 
 ## Features
-- [ ] A
-- [ ] B
-- [ ] C
-- [ ] D
-- [ ] E
-- [ ] F
+- [ ] Future...
 
 ## Pending
-- [ ] Support AWS SQS messaging active option
+- [x] Support AWS SQS messaging active option
+- [x] Support AWS SES to send e-mails
 
 ## Setup
 

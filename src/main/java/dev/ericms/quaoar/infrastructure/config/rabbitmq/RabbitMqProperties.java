@@ -1,9 +1,12 @@
 package dev.ericms.quaoar.infrastructure.config.rabbitmq;
 
+import dev.ericms.quaoar.infrastructure.config.conditional.MessagingRabbitMqCondition;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
 @Component
+@Conditional(MessagingRabbitMqCondition.class)
 public class RabbitMqProperties {
 
     @Value("${messaging.rabbitmq.host}")

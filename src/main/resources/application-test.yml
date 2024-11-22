@@ -23,24 +23,25 @@ messaging:
     password: ${RABBIT_MQ_PASSWORD:guest}
     virtual-host: ${RABBIT_MQ_VIRTUAL_HOST:quaoar}
     connection-timeout: ${RABBIT_MQ_CONNECTION_TIMEOUT:300000}
-
-aws:
-  access: ${AWS_ACCESS_KEY:}
-  secret: ${AWS_SECRET_KEY:}
-  region: ${AWS_REGION:}
+  aws:
+    access: ${AWS_ACCESS_KEY:}
+    secret: ${AWS_SECRET_KEY:}
+    region: ${AWS_REGION:}
+    ses:
+      from: ${AWS_SES_FROM:}
 
 broker:
   consumer:
     queues:
-      delete-user: queue-delete-user
-      change-user: queue-change-user-info
-      subscribe-topic: queue-subscribe-to-topic
-      unsubscribe-topics: queue-unsubscribe-from-topics
+      delete-user: "delete-user.q"
+      change-user: "change-user-info.q"
+      subscribe-topic: "subscribe-to-topic.q"
+      unsubscribe-topics: "unsubscribe-from-topics.q"
     routing-keys:
-      delete-user: key-delete-user
-      change-user: key-change-user-info
-      subscribe-topic: key-subscribe-to-topic
-      unsubscribe-topics: key-unsubscribe-from-topics
+      delete-user: "delete-user"
+      change-user: "change-user-info"
+      subscribe-topic: "subscribe-to-topic"
+      unsubscribe-topics: "unsubscribe-from-topics"
     exchange:
       name: "quaoar.topic"
     concurrent-consumers: 2

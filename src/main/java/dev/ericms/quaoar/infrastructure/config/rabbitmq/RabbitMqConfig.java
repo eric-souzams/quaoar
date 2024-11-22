@@ -31,10 +31,10 @@ public class RabbitMqConfig {
     private String exchange;
 
     @Value("${broker.consumer.concurrent-consumers}")
-    private String concurrentConsumers;
+    private Integer concurrentConsumers;
 
     @Value("${broker.consumer.prefetch-count}")
-    private String prefetchCount;
+    private Integer prefetchCount;
 
     @Value("${broker.consumer.queues.delete-user}")
     private String queueDeleteUser;
@@ -99,14 +99,15 @@ public class RabbitMqConfig {
         factory.setConnectionFactory(connectionFactory);
         factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         factory.setMessageConverter(messageConverter());
-        factory.setPrefetchCount(Integer.valueOf(prefetchCount));
-        factory.setConcurrentConsumers(Integer.valueOf(concurrentConsumers));
+        factory.setPrefetchCount(prefetchCount);
+        factory.setConcurrentConsumers(concurrentConsumers);
         return factory;
     }
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        logger.info("Creating RabbitMQ connection factory");
+        logger.info("Connecting to RabbitMQ...");
+
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setHost(rabbitMqProperties.getHost());
         connectionFactory.setPort(rabbitMqProperties.getPort());
