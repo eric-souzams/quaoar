@@ -28,6 +28,19 @@
 local | test | dev | qas | prod
 ```
 
+### Payload
+
+```json
+change-user-info.q
+
+{
+    "name": "Éric Magalhães",
+    "email": "eric@eric.dev",
+    "integrationId": "H7f%7$#fe1",
+    "blocked": "false"
+}
+```
+
 ### Environment Variables
 ```text
 | Variable       | Description               |

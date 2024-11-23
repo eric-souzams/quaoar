@@ -36,9 +36,9 @@ messaging:
     virtual-host: ${RABBIT_MQ_VIRTUAL_HOST:quaoar}
     connection-timeout: ${RABBIT_MQ_CONNECTION_TIMEOUT:300000}
   aws:
-    access: ${AWS_ACCESS_KEY:}
-    secret: ${AWS_SECRET_KEY:}
-    region: ${AWS_REGION:}
+    access: ${AWS_ACCESS_KEY:123}
+    secret: ${AWS_SECRET_KEY:123}
+    region: ${AWS_REGION:us-east-1}
     ses:
       from: ${AWS_SES_FROM:}
 
@@ -56,5 +56,5 @@ broker:
       unsubscribe-topics: "unsubscribe-from-topics"
     exchange:
       name: "quaoar.topic"
-    concurrent-consumers: 2
+    concurrent-consumers: 1
     prefetch-count: 15

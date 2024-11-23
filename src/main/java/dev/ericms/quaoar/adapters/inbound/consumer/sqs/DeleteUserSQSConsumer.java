@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,6 +19,7 @@ public class DeleteUserSQSConsumer {
     @Autowired
     private EventPublisherOutboundPort eventPublisherOutboundPort;
 
+    @JmsListener(destination = "${broker.consumer.queues.delete-user}")
     public void handler(DeleteUserPayload payload) {
         logger.info("Start processing message from payload -> {}", payload);
 
