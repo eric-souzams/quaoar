@@ -26,6 +26,12 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
 messaging:
   active: ${ACTIVE_MESSAGING_SERVICE:RABBITMQ}
   rabbitmq:
