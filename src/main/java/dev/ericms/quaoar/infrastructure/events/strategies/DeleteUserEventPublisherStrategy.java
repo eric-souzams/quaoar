@@ -19,8 +19,8 @@ public class DeleteUserEventPublisherStrategy implements EventPublisherStrategy<
     @Override
     public void publish(DomainEvent event) {
         if (event instanceof DeleteUserDomainEvent) {
-            DeleteUserEvent deleteUserDomainEvent = new DeleteUserEvent(this, (DeleteUserDomainEvent) event);
-            publisher.publishEvent(deleteUserDomainEvent);
+            DeleteUserEvent deleteUserEvent = new DeleteUserEvent(this, (DeleteUserDomainEvent) event);
+            publisher.publishEvent(deleteUserEvent);
         }
     }
 }

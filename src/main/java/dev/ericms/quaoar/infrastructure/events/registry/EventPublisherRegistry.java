@@ -25,7 +25,7 @@ public class EventPublisherRegistry {
         for (EventPublisherStrategy<? extends DomainEvent> strategy : strategies) {
             Class<? extends DomainEvent> eventType = getDomainEventType(strategy);
             this.strategies.put(eventType, strategy);
-            logger.info("Registered strategy '{}' for event type '{}'", strategy.getClass().getSimpleName(), eventType.getSimpleName());
+            logger.info("Registering strategy '{}' for event type '{}'", strategy.getClass().getSimpleName(), eventType.getSimpleName());
         }
         logger.info("{} strategy(ies) have been registered for the publisher", strategies.size());
     }
