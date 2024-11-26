@@ -6,7 +6,7 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import dev.ericms.quaoar.infrastructure.config.conditional.MessagingAwsCondition;
+import dev.ericms.quaoar.infrastructure.config.conditional.MessagingSqsCondition;
 import dev.ericms.quaoar.infrastructure.exception.JmsErrorHandler;
 import jakarta.jms.Session;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 
 @EnableJms
 @Configuration
-@Conditional(MessagingAwsCondition.class)
+@Conditional(MessagingSqsCondition.class)
 public class AwsSqsConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(AwsSqsConfig.class);

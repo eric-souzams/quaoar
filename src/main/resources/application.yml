@@ -40,7 +40,7 @@ messaging:
     secret: ${AWS_SECRET_KEY:123}
     region: ${AWS_REGION:us-east-1}
     ses:
-      from: ${AWS_SES_FROM:}
+      from: ${AWS_SES_FROM:example@example.com}
 
 broker:
   consumer:

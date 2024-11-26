@@ -4,7 +4,7 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
-import dev.ericms.quaoar.infrastructure.config.conditional.MessagingAwsCondition;
+import dev.ericms.quaoar.infrastructure.config.conditional.MessagingSqsCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@Conditional(MessagingAwsCondition.class)
+@Conditional(MessagingSqsCondition.class)
 public class AwsSesConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(AwsSesConfig.class);

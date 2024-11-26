@@ -2,7 +2,7 @@ package dev.ericms.quaoar.adapters.inbound.consumer.sqs;
 
 import dev.ericms.quaoar.adapters.inbound.consumer.dto.SubscribeOrUnSubscribeToTopicPayload;
 import dev.ericms.quaoar.application.ports.outbound.EventPublisherOutboundPort;
-import dev.ericms.quaoar.infrastructure.config.conditional.MessagingAwsCondition;
+import dev.ericms.quaoar.infrastructure.config.conditional.MessagingSqsCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@Conditional(MessagingAwsCondition.class)
+@Conditional(MessagingSqsCondition.class)
 public class SubscribeToTopicSQSConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger(SubscribeToTopicSQSConsumer.class);
