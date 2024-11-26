@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.infrastructure.events.registry;
 
-import dev.ericms.quaoar.application.core.event.interfaces.DomainEvent;
+import dev.ericms.quaoar.application.core.events.interfaces.DomainEvent;
 import dev.ericms.quaoar.infrastructure.events.interfaces.EventPublisherStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

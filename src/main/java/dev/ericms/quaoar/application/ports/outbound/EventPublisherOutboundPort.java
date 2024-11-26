@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.application.ports.outbound;
 
-import dev.ericms.quaoar.application.core.event.interfaces.DomainEvent;
+import dev.ericms.quaoar.application.core.events.interfaces.DomainEvent;
 
 public interface EventPublisherOutboundPort {
 

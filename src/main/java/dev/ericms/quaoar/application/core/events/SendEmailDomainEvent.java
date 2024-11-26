@@ -1,7 +1,7 @@
-package dev.ericms.quaoar.application.core.event;
+package dev.ericms.quaoar.application.core.events;
 
 import dev.ericms.quaoar.application.core.dto.SendEmailDto;
-import dev.ericms.quaoar.application.core.event.interfaces.DomainEvent;
+import dev.ericms.quaoar.application.core.events.interfaces.DomainEvent;
 
 public class SendEmailDomainEvent implements DomainEvent {
 
@@ -13,5 +13,12 @@ public class SendEmailDomainEvent implements DomainEvent {
 
     public SendEmailDto getBody() {
         return emailDto;
+    }
+
+    @Override
+    public String toString() {
+        return "SendEmailDomainEvent{" +
+                "emailDto=" + emailDto +
+                '}';
     }
 }

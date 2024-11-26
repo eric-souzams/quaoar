@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.infrastructure.events.publisher;
 
-import dev.ericms.quaoar.application.core.event.interfaces.DomainEvent;
+import dev.ericms.quaoar.application.core.events.interfaces.DomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.events.interfaces.EventPublisherStrategy;
 import dev.ericms.quaoar.infrastructure.events.registry.EventPublisherRegistry;
