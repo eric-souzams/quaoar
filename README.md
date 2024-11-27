@@ -28,7 +28,7 @@
 local | test | dev | qas | prod
 ```
 
-### Payload
+### Queue Payload
 
 ```json
 change-user-info.q
@@ -38,6 +38,41 @@ change-user-info.q
     "email": "eric@eric.dev",
     "integrationId": "H7f%7$#fe1",
     "blocked": "false"
+}
+```
+
+```json
+delete-user.q
+
+{
+    "email": "eric@eric.dev",
+    "integrationId": "H7f%7$#fe1"
+}
+```
+
+```json
+subscribe-to-topic.q
+
+{
+    "email": "eric@eric.dev",
+    "integrationId": "H7f%7$#fe1",
+    "topics": {
+      "PARTY",
+      "UBER"
+    }
+}
+```
+
+```json
+unsubscribe-from-topics.q
+
+{
+    "email": "eric@eric.dev",
+    "integrationId": "H7f%7$#fe1",
+    "topics": {
+      "PARTY",
+      "UBER"
+    }
 }
 ```
 
@@ -52,6 +87,7 @@ change-user-info.q
 | AWS_REGION     | AWS region                |
 | AWS_ACCESS_KEY | AWS access key to connect |
 | AWS_SECRET_KEY | AWS secret key to connect |
+| AWS_SES_FROM   | E-mail to use as origin   |
 ```
 
 ### Running
