@@ -7,24 +7,25 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_templates")
-public class Template {
+@Table(name = "tb_topics")
+public class TopicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "name", length = 150, nullable = false)
     private String title;
 
-    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
-    private String content;
-
-    @Column(name = "is_active", nullable = false)
+    @Column(name = "is_active", length = 150, nullable = false)
     private Boolean active;
+
+    @Column(name = "integration_id", length = 150, nullable = false)
+    private String integrationId;
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -36,16 +37,21 @@ public class Template {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    public Template(UUID id, String title, String content, Boolean active, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    @ManyToMany(mappedBy = "topicEntities")
+    private List<ContactEntity> contactEntities;
+
+    public TopicEntity(UUID id, String title, Boolean active, String integrationId, LocalDateTime createdAt,
+                       LocalDateTime updatedAt, List<ContactEntity> contactEntities) {
         this.id = id;
         this.title = title;
-        this.content = content;
         this.active = active;
+        this.integrationId = integrationId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.contactEntities = contactEntities;
     }
 
-    public Template() {
+    public TopicEntity() {
     }
 
     public UUID getId() {
@@ -64,20 +70,20 @@ public class Template {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Boolean getActive() {
         return active;
     }
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getIntegrationId() {
+        return integrationId;
+    }
+
+    public void setIntegrationId(String integrationId) {
+        this.integrationId = integrationId;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -96,4 +102,11 @@ public class Template {
         this.updatedAt = updatedAt;
     }
 
+    public List<ContactEntity> getContacts() {
+        return contactEntities;
+    }
+
+    public void setContacts(List<ContactEntity> contactEntities) {
+        this.contactEntities = contactEntities;
+    }
 }

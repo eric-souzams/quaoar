@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static dev.ericms.quaoar.adapters.inbound.controller.utils.BaseResponse.*;
-import static dev.ericms.quaoar.adapters.inbound.controller.utils.Constants.MAIL_SENT_WITH_SUCCESS;
+import static dev.ericms.quaoar.application.core.utils.Constants.MAIL_SENT_WITH_SUCCESS;
 
 @RestController
 @RequestMapping("/v1/mail")

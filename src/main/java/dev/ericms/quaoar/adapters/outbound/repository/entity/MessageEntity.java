@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_messages")
-public class Message {
+public class MessageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,11 +35,11 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "template_id", referencedColumnName = "id")
-    private Template template;
+    private TemplateEntity templateEntity;
 
     @ManyToOne
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
-    private Topic topic;
+    private TopicEntity topicEntity;
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -55,22 +55,22 @@ public class Message {
     @Column(name = "status", nullable = false)
     private MessageStatus status;
 
-    public Message(UUID id, String subject, String content, String emailFrom, String recipientsTo, String recipientsCc,
-                   Template template, Topic topic, LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status) {
+    public MessageEntity(UUID id, String subject, String content, String emailFrom, String recipientsTo, String recipientsCc,
+                         TemplateEntity templateEntity, TopicEntity topicEntity, LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status) {
         this.id = id;
         this.subject = subject;
         this.content = content;
         this.emailFrom = emailFrom;
         this.recipientsTo = recipientsTo;
         this.recipientsCc = recipientsCc;
-        this.template = template;
-        this.topic = topic;
+        this.templateEntity = templateEntity;
+        this.topicEntity = topicEntity;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.status = status;
     }
 
-    public Message() {
+    public MessageEntity() {
     }
 
     public UUID getId() {
@@ -97,20 +97,20 @@ public class Message {
         this.content = content;
     }
 
-    public Template getTemplate() {
-        return template;
+    public TemplateEntity getTemplate() {
+        return templateEntity;
     }
 
-    public void setTemplate(Template template) {
-        this.template = template;
+    public void setTemplate(TemplateEntity templateEntity) {
+        this.templateEntity = templateEntity;
     }
 
-    public Topic getTopic() {
-        return topic;
+    public TopicEntity getTopic() {
+        return topicEntity;
     }
 
-    public void setTopic(Topic topic) {
-        this.topic = topic;
+    public void setTopic(TopicEntity topicEntity) {
+        this.topicEntity = topicEntity;
     }
 
     public LocalDateTime getCreatedAt() {

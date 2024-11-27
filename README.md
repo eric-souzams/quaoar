@@ -51,12 +51,12 @@ delete-user.q
 ```
 
 ```json
-subscribe-to-topic.q
+subscribe-to-topicEntity.q
 
 {
     "email": "eric@eric.dev",
     "integrationId": "H7f%7$#fe1",
-    "topics": {
+    "topicEntities": {
       "PARTY",
       "UBER"
     }
@@ -64,12 +64,12 @@ subscribe-to-topic.q
 ```
 
 ```json
-unsubscribe-from-topics.q
+unsubscribe-from-topicEntities.q
 
 {
     "email": "eric@eric.dev",
     "integrationId": "H7f%7$#fe1",
-    "topics": {
+    "topicEntities": {
       "PARTY",
       "UBER"
     }

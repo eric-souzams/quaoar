@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_contacts")
-public class Contact {
+public class ContactEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -49,10 +49,10 @@ public class Contact {
             joinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id")
     )
-    private List<Topic> topics;
+    private List<TopicEntity> topicEntities;
 
-    public Contact(UUID id, String name, String email, Boolean unsubscribed, Boolean blocked,
-                   String integrationId, LocalDateTime createdAt, LocalDateTime updatedAt, List<Topic> topics) {
+    public ContactEntity(UUID id, String name, String email, Boolean unsubscribed, Boolean blocked,
+                         String integrationId, LocalDateTime createdAt, LocalDateTime updatedAt, List<TopicEntity> topicEntities) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -61,10 +61,21 @@ public class Contact {
         this.integrationId = integrationId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.topics = topics;
+        this.topicEntities = topicEntities;
     }
 
-    public Contact() {
+    public ContactEntity() {
+    }
+
+    @PreUpdate
+    private void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PrePersist
+    private void prePersist() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public UUID getId() {
@@ -131,12 +142,12 @@ public class Contact {
         this.updatedAt = updatedAt;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
+    public List<TopicEntity> getTopics() {
+        return topicEntities;
     }
 
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
+    public void setTopics(List<TopicEntity> topicEntities) {
+        this.topicEntities = topicEntities;
     }
 
 }
