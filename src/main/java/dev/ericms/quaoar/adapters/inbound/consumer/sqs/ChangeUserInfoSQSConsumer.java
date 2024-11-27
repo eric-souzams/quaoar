@@ -1,6 +1,8 @@
 package dev.ericms.quaoar.adapters.inbound.consumer.sqs;
 
 import dev.ericms.quaoar.adapters.inbound.consumer.dto.ChangeUserInfoPayload;
+import dev.ericms.quaoar.adapters.inbound.consumer.mapper.ChangeUserInfoMapper;
+import dev.ericms.quaoar.application.core.events.ChangeUserInfoDomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.config.conditional.MessagingSqsCondition;
 import org.slf4j.Logger;
@@ -19,10 +21,14 @@ public class ChangeUserInfoSQSConsumer {
     @Autowired
     private EventPublisherOutboundPort eventPublisherOutboundPort;
 
+    @Autowired
+    private ChangeUserInfoMapper changeUserInfoMapper;
+
     @JmsListener(destination = "${broker.consumer.queues.change-user}")
     public void handler(ChangeUserInfoPayload payload) {
         logger.info("Start processing message from payload -> {}", payload);
 
+        eventPublisherOutboundPort.publishEvent(new ChangeUserInfoDomainEvent(changeUserInfoMapper.toDto(payload)));
 
         logger.info("Ended to processing message");
     }

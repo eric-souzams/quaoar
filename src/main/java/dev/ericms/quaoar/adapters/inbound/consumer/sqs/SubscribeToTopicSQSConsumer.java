@@ -1,6 +1,8 @@
 package dev.ericms.quaoar.adapters.inbound.consumer.sqs;
 
 import dev.ericms.quaoar.adapters.inbound.consumer.dto.SubscribeOrUnSubscribeToTopicPayload;
+import dev.ericms.quaoar.adapters.inbound.consumer.mapper.SubscribeOrUnSubscribeToTopicMapper;
+import dev.ericms.quaoar.application.core.events.SubscribeToTopicDomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.config.conditional.MessagingSqsCondition;
 import org.slf4j.Logger;
@@ -19,10 +21,14 @@ public class SubscribeToTopicSQSConsumer {
     @Autowired
     private EventPublisherOutboundPort eventPublisherOutboundPort;
 
+    @Autowired
+    private SubscribeOrUnSubscribeToTopicMapper subscribeOrUnSubscribeToTopicMapper;
+
     @JmsListener(destination = "${broker.consumer.queues.subscribe-topic}")
     public void handler(SubscribeOrUnSubscribeToTopicPayload payload) {
         logger.info("Start processing message from payload -> {}", payload);
 
+        eventPublisherOutboundPort.publishEvent(new SubscribeToTopicDomainEvent(subscribeOrUnSubscribeToTopicMapper.toDto(payload)));
 
         logger.info("Ended to processing message");
     }

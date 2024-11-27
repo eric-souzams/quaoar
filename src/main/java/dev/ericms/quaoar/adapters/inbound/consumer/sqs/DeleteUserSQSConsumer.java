@@ -1,6 +1,8 @@
 package dev.ericms.quaoar.adapters.inbound.consumer.sqs;
 
 import dev.ericms.quaoar.adapters.inbound.consumer.dto.DeleteUserPayload;
+import dev.ericms.quaoar.adapters.inbound.consumer.mapper.DeleteUserMapper;
+import dev.ericms.quaoar.application.core.events.DeleteUserDomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.config.conditional.MessagingSqsCondition;
 import org.slf4j.Logger;
@@ -19,10 +21,14 @@ public class DeleteUserSQSConsumer {
     @Autowired
     private EventPublisherOutboundPort eventPublisherOutboundPort;
 
+    @Autowired
+    private DeleteUserMapper deleteUserMapper;
+
     @JmsListener(destination = "${broker.consumer.queues.delete-user}")
     public void handler(DeleteUserPayload payload) {
         logger.info("Start processing message from payload -> {}", payload);
 
+        eventPublisherOutboundPort.publishEvent(new DeleteUserDomainEvent(deleteUserMapper.toDto(payload)));
 
         logger.info("Ended to processing message");
     }
