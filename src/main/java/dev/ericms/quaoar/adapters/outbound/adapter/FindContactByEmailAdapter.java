@@ -7,6 +7,7 @@ import dev.ericms.quaoar.application.core.domain.Contact;
 import dev.ericms.quaoar.application.ports.outbound.FindContactByEmailOutboundPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class FindContactByEmailAdapter implements FindContactByEmailOutboundPort
     @Autowired
     private ContactMapper contactMapper;
 
+    @Transactional
     @Override
     public Optional<Contact> find(String email) {
         Optional<ContactEntity> contactEntity = contactRepository.findByEmail(email);

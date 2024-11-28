@@ -7,6 +7,7 @@ import dev.ericms.quaoar.application.core.domain.Contact;
 import dev.ericms.quaoar.application.ports.outbound.SaveContactOutboundPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class SaveContactAdapter implements SaveContactOutboundPort {
@@ -17,6 +18,7 @@ public class SaveContactAdapter implements SaveContactOutboundPort {
     @Autowired
     private ContactMapper contactMapper;
 
+    @Transactional
     @Override
     public void save(Contact contact) {
         ContactEntity contactEntity = contactMapper.toEntity(contact);

@@ -1,6 +1,7 @@
 package dev.ericms.quaoar.application.core.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,10 +23,10 @@ public class Contact {
 
     private LocalDateTime updatedAt;
 
-    private List<Topic> topics;
+    private List<ContactTopic> topics;
 
     public Contact(UUID id, String name, String email, Boolean unsubscribed, Boolean blocked,
-                   String integrationId, LocalDateTime createdAt, LocalDateTime updatedAt, List<Topic> topics) {
+                   String integrationId, LocalDateTime createdAt, LocalDateTime updatedAt, List<ContactTopic> topics) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -38,6 +39,8 @@ public class Contact {
     }
 
     public Contact() {
+        this.unsubscribed = Boolean.TRUE;
+        this.topics = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -104,12 +107,11 @@ public class Contact {
         this.updatedAt = updatedAt;
     }
 
-    public List<Topic> getTopics() {
+    public List<ContactTopic> getTopics() {
         return topics;
     }
 
-    public void setTopics(List<Topic> topics) {
+    public void setTopics(List<ContactTopic> topics) {
         this.topics = topics;
     }
-
 }
