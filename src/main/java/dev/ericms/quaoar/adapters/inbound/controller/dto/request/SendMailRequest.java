@@ -3,21 +3,24 @@ package dev.ericms.quaoar.adapters.inbound.controller.dto.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public class SendMailRequest {
 
+    @NotBlank(message = "Email can't be empty")
     @Email(message = "Email should be valid")
     private String replyTo;
 
     @NotBlank(message = "Subject can't be empty")
     private String subject;
 
-    @NotBlank(message = "Content can't be empty")
+    @NotBlank(message = "Body can't be empty")
     private String body;
 
+    @NotEmpty(message = "Recipients can't be empty")
     private List<@Email(message = "Email should be valid") String> recipients;
 
     private String template_id;

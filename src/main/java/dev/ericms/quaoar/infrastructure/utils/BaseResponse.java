@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.adapters.inbound.controller.utils;
+package dev.ericms.quaoar.infrastructure.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -14,11 +14,16 @@ public class BaseResponse {
     private String message;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Class<?> body;
+    private Object body;
 
-    public BaseResponse(HttpStatus status, String message, Class<?> body) {
+    public BaseResponse(HttpStatus status, String message, Object body) {
         this.status = String.valueOf(status.value());
         this.message = message;
+        this.body = body;
+    }
+
+    public BaseResponse(HttpStatus status, Object body) {
+        this.status = String.valueOf(status.value());
         this.body = body;
     }
 
@@ -31,53 +36,62 @@ public class BaseResponse {
         this.status = String.valueOf(status.value());
     }
 
-    public static ResponseEntity<BaseResponse> createResponse(HttpStatus status, String message, Class<?> body) {
+    public BaseResponse() {
+    }
+
+    public static ResponseEntity<Object> createResponse(HttpStatus status, String message, Object body) {
         BaseResponse baseResponse = new BaseResponse(status, message, body);
 
         return ResponseEntity.status(status.value()).body(baseResponse);
     }
 
-    public static ResponseEntity<BaseResponse> createResponse(HttpStatus status, String message) {
+    public static ResponseEntity<Object> createResponse(HttpStatus status, Object body) {
+        BaseResponse baseResponse = new BaseResponse(status, body);
+
+        return ResponseEntity.status(status.value()).body(baseResponse);
+    }
+
+    public static ResponseEntity<Object> createResponse(HttpStatus status, String message) {
         BaseResponse baseResponse = new BaseResponse(status, message);
 
         return ResponseEntity.status(status.value()).body(baseResponse);
     }
 
-    public static ResponseEntity<BaseResponse> createResponse(HttpStatus status) {
+    public static ResponseEntity<Object> createResponse(HttpStatus status) {
         BaseResponse baseResponse = new BaseResponse(status);
 
         return ResponseEntity.status(status.value()).body(baseResponse);
     }
 
-    public static ResponseEntity<BaseResponse> createdResponse(String message) {
+    public static ResponseEntity<Object> createdResponse(String message) {
         return createResponse(HttpStatus.CREATED, message);
     }
 
-    public static ResponseEntity<BaseResponse> createdResponse() {
+    public static ResponseEntity<Object> createdResponse() {
         return createResponse(HttpStatus.CREATED);
     }
 
-    public static ResponseEntity<BaseResponse> okResponse(String message) {
+    public static ResponseEntity<Object> okResponse(String message) {
         return createResponse(HttpStatus.OK, message);
     }
 
-    public static ResponseEntity<BaseResponse> okResponse() {
+    public static ResponseEntity<Object> okResponse() {
         return createResponse(HttpStatus.OK);
     }
 
-    public static ResponseEntity<BaseResponse> deletedResponse() {
+    public static ResponseEntity<Object> deletedResponse() {
         return createResponse(HttpStatus.NO_CONTENT);
     }
 
-    public static ResponseEntity<BaseResponse> deletedResponse(String message) {
+    public static ResponseEntity<Object> deletedResponse(String message) {
         return createResponse(HttpStatus.NO_CONTENT, message);
     }
 
-    public static ResponseEntity<BaseResponse> notFoundResponse() {
+    public static ResponseEntity<Object> notFoundResponse() {
         return createResponse(HttpStatus.NOT_FOUND);
     }
 
-    public static ResponseEntity<BaseResponse> notFoundResponse(String message) {
+    public static ResponseEntity<Object> notFoundResponse(String message) {
         return createResponse(HttpStatus.NOT_FOUND, message);
     }
 
@@ -97,11 +111,11 @@ public class BaseResponse {
         this.message = message;
     }
 
-    public Class<?> getBody() {
+    public Object getBody() {
         return body;
     }
 
-    public void setBody(Class<?> body) {
+    public void setBody(Object body) {
         this.body = body;
     }
 }

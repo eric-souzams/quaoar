@@ -38,11 +38,11 @@ public class ChangeUserInfoListener {
             //if exists, update
             Contact contact = findContactByEmailInboundPort.find(payload.getEmail());
             saveContactInboundPort.save(createOrUpdateContract(payload, contact));
-            logger.info("Updated contact: {}", payload.getEmail());
+            logger.info("Updated contact from e-mail address: {}", payload.getEmail());
         } else {
             //if not exists, create
             saveContactInboundPort.save(createOrUpdateContract(payload, new Contact()));
-            logger.info("Created contact: {}", payload.getEmail());
+            logger.info("Created contact from e-mail address: {}", payload.getEmail());
         }
     }
 

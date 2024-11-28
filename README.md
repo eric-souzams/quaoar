@@ -81,6 +81,7 @@ unsubscribe-from-topicEntities.q
 | Variable       | Description               |
 |----------------|---------------------------|
 | DB_HOST        | Database URL host         |
+| DB_PORT        | Database port             |
 | DB_DATABASE    | Database name             |
 | DB_USERNAME    | Database username         |
 | DB_PASSWORD    | Database password         |

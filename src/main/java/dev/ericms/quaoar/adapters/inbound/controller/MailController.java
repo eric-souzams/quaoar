@@ -1,7 +1,7 @@
 package dev.ericms.quaoar.adapters.inbound.controller;
 
 import dev.ericms.quaoar.adapters.inbound.controller.dto.request.SendMailRequest;
-import dev.ericms.quaoar.adapters.inbound.controller.utils.BaseResponse;
+import dev.ericms.quaoar.infrastructure.utils.BaseResponse;
 
 import jakarta.validation.Valid;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static dev.ericms.quaoar.adapters.inbound.controller.utils.BaseResponse.*;
+import static dev.ericms.quaoar.infrastructure.utils.BaseResponse.*;
 import static dev.ericms.quaoar.application.core.utils.Constants.MAIL_SENT_WITH_SUCCESS;
 
 @RestController
@@ -25,7 +25,7 @@ public class MailController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    public ResponseEntity<BaseResponse> send(@Valid @RequestBody SendMailRequest requestPayload) {
+    public ResponseEntity<Object> send(@Valid @RequestBody SendMailRequest requestPayload) {
 
 
         return createResponse(HttpStatus.OK, MAIL_SENT_WITH_SUCCESS.getMessage());

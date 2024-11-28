@@ -29,12 +29,7 @@ public class ErrorMessage {
         this.message = message;
     }
 
-    public ErrorMessage(HttpServletRequest request, HttpStatus status, String message, BindingResult result) {
-        this.path = request.getRequestURI();
-        this.method = request.getMethod();
-        this.status = String.valueOf(status.value());
-        this.message = message;
-        
+    public ErrorMessage(BindingResult result) {
         extractErrors(result);
     }
 
