@@ -33,16 +33,20 @@ public class ChangeUserInfoListener {
     public void handler(ChangeUserInfoEvent event) {
         logger.info("New event received: {}", event.getBody());
 
-        ChangeUserInfoDto payload = getPayload(event);
-        if (checkIfExistsContactEmailInboundPort.check(payload.getEmail())) {
-            //if exists, update
-            Contact contact = findContactByEmailInboundPort.find(payload.getEmail());
-            saveContactInboundPort.save(createOrUpdateContract(payload, contact));
-            logger.info("Updated contact from e-mail address: {}", payload.getEmail());
-        } else {
-            //if not exists, create
-            saveContactInboundPort.save(createOrUpdateContract(payload, new Contact()));
-            logger.info("Created contact from e-mail address: {}", payload.getEmail());
+        try {
+            ChangeUserInfoDto payload = getPayload(event);
+            if (checkIfExistsContactEmailInboundPort.check(payload.getEmail())) {
+                //if exists, update
+                Contact contact = findContactByEmailInboundPort.find(payload.getEmail());
+                saveContactInboundPort.save(createOrUpdateContract(payload, contact));
+                logger.info("Updated contact from e-mail address: {}", payload.getEmail());
+            } else {
+                //if not exists, create
+                saveContactInboundPort.save(createOrUpdateContract(payload, new Contact()));
+                logger.info("Created contact from e-mail address: {}", payload.getEmail());
+            }
+        } catch (BusinessException e) {
+            logger.error("Error to process event: {}", e.getMessage());
         }
     }
 

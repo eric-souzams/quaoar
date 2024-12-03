@@ -15,5 +15,10 @@ public class DeleteUserDomainEvent implements DomainEvent {
         return deleteUserDto;
     }
 
-
+    @Override
+    public String toString() {
+        return "DeleteUserDomainEvent{" +
+                "deleteUserDto=" + deleteUserDto +
+                '}';
+    }
 }

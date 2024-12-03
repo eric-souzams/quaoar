@@ -46,7 +46,6 @@ delete-user.q
 
 {
     "email": "eric@eric.dev",
-    "integrationId": "H7f%7$#fe1"
 }
 ```
 

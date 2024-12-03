@@ -6,7 +6,6 @@ import dev.ericms.quaoar.application.ports.outbound.SaveContactOutboundPort;
 
 public class SaveContactUseCase implements SaveContactInboundPort {
 
-
     private final SaveContactOutboundPort saveContactOutboundPort;
 
     public SaveContactUseCase(SaveContactOutboundPort saveContactOutboundPort) {

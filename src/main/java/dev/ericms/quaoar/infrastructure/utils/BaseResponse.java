@@ -14,17 +14,17 @@ public class BaseResponse {
     private String message;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Object body;
+    private Object content;
 
-    public BaseResponse(HttpStatus status, String message, Object body) {
+    public BaseResponse(HttpStatus status, String message, Object content) {
         this.status = String.valueOf(status.value());
         this.message = message;
-        this.body = body;
+        this.content = content;
     }
 
-    public BaseResponse(HttpStatus status, Object body) {
+    public BaseResponse(HttpStatus status, Object content) {
         this.status = String.valueOf(status.value());
-        this.body = body;
+        this.content = content;
     }
 
     public BaseResponse(HttpStatus status, String message) {
@@ -111,11 +111,11 @@ public class BaseResponse {
         this.message = message;
     }
 
-    public Object getBody() {
-        return body;
+    public Object getContent() {
+        return content;
     }
 
-    public void setBody(Object body) {
-        this.body = body;
+    public void setContent(Object content) {
+        this.content = content;
     }
 }

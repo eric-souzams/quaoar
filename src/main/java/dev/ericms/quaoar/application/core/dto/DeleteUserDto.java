@@ -6,14 +6,11 @@ public class DeleteUserDto {
 
     private String email;
 
-    private String integrationId;
-
     public DeleteUserDto() {
     }
 
-    public DeleteUserDto(String email, String integrationId) {
+    public DeleteUserDto(String email) {
         this.email = email;
-        this.integrationId = integrationId;
     }
 
     public String getEmail() {
@@ -24,31 +21,22 @@ public class DeleteUserDto {
         this.email = email;
     }
 
-    public String getIntegrationId() {
-        return integrationId;
-    }
-
-    public void setIntegrationId(String integrationId) {
-        this.integrationId = integrationId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         DeleteUserDto that = (DeleteUserDto) o;
-        return Objects.equals(email, that.email) && Objects.equals(integrationId, that.integrationId);
+        return Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, integrationId);
+        return Objects.hashCode(email);
     }
 
     @Override
     public String toString() {
         return "DeleteUserDto{" +
                 "email='" + email + '\'' +
-                ", integrationId='" + integrationId + '\'' +
                 '}';
     }
 }
