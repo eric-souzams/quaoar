@@ -1,7 +1,6 @@
 package dev.ericms.quaoar.adapters.inbound.controller;
 
 import dev.ericms.quaoar.adapters.inbound.controller.dto.request.SendMailRequest;
-import dev.ericms.quaoar.infrastructure.utils.BaseResponse;
 
 import jakarta.validation.Valid;
 
@@ -25,7 +24,7 @@ public class MailController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    public ResponseEntity<Object> send(@Valid @RequestBody SendMailRequest requestPayload) {
+    public ResponseEntity<Object> send(@Valid @RequestBody SendMailRequest payload) {
 
 
         return createResponse(HttpStatus.OK, MAIL_SENT_WITH_SUCCESS.getMessage());

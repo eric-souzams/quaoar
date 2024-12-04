@@ -44,10 +44,10 @@ create table if not exists tb_topics (
     id uuid not null,
     is_active boolean not null,
     created_at timestamp(6) not null,
-    integration_id varchar(150) not null,
     name varchar(150) not null,
     updated_at timestamp(6) not null,
-    primary key (id)
+    primary key (id),
+    unique (name)
 );
 
 alter table if exists tb_contact_topics

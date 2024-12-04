@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.application.ports.inbound;
+package dev.ericms.quaoar.application.ports.inbound.contact;
 
 public interface CheckIfExistsContactEmailInboundPort {
 

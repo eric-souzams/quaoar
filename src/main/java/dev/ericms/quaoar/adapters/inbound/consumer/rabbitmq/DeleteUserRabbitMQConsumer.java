@@ -4,7 +4,7 @@ import com.rabbitmq.client.Channel;
 import dev.ericms.quaoar.adapters.inbound.consumer.dto.DeleteUserPayload;
 import dev.ericms.quaoar.adapters.inbound.consumer.mapper.DeleteUserMapper;
 import dev.ericms.quaoar.application.core.events.DeleteUserDomainEvent;
-import dev.ericms.quaoar.application.ports.outbound.EventPublisherOutboundPort;
+import dev.ericms.quaoar.application.ports.outbound.events.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.config.conditional.MessagingRabbitMqCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

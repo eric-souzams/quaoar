@@ -10,17 +10,17 @@ import java.util.List;
 
 public class SendMailRequest {
 
-    @NotBlank(message = "Email can't be empty")
+    @NotBlank(message = "Field 'email' can't be empty")
     @Email(message = "Email should be valid")
     private String replyTo;
 
-    @NotBlank(message = "Subject can't be empty")
+    @NotBlank(message = "Field 'subject' can't be empty")
     private String subject;
 
-    @NotBlank(message = "Body can't be empty")
+    @NotBlank(message = "Field 'body' can't be empty")
     private String body;
 
-    @NotEmpty(message = "Recipients can't be empty")
+    @NotEmpty(message = "Field list 'recipients' can't be empty")
     private List<@Email(message = "Email should be valid") String> recipients;
 
     private String template_id;

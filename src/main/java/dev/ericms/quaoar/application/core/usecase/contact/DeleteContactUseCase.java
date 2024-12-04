@@ -1,8 +1,8 @@
 package dev.ericms.quaoar.application.core.usecase.contact;
 
 import dev.ericms.quaoar.application.core.domain.Contact;
-import dev.ericms.quaoar.application.ports.inbound.DeleteContactInboundPort;
-import dev.ericms.quaoar.application.ports.outbound.DeleteContactOutboundPort;
+import dev.ericms.quaoar.application.ports.inbound.contact.DeleteContactInboundPort;
+import dev.ericms.quaoar.application.ports.outbound.contact.DeleteContactOutboundPort;
 
 public class DeleteContactUseCase implements DeleteContactInboundPort {
 

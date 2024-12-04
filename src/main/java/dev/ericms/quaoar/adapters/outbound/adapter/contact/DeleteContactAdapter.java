@@ -1,18 +1,16 @@
-package dev.ericms.quaoar.adapters.outbound.adapter;
+package dev.ericms.quaoar.adapters.outbound.adapter.contact;
 
 import dev.ericms.quaoar.adapters.outbound.mapper.ContactMapper;
 import dev.ericms.quaoar.adapters.outbound.repository.ContactRepository;
 import dev.ericms.quaoar.adapters.outbound.repository.entity.ContactEntity;
 import dev.ericms.quaoar.application.core.domain.Contact;
-import dev.ericms.quaoar.application.ports.outbound.FindContactByEmailOutboundPort;
+import dev.ericms.quaoar.application.ports.outbound.contact.DeleteContactOutboundPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Component
-public class FindContactByEmailAdapter implements FindContactByEmailOutboundPort {
+public class DeleteContactAdapter implements DeleteContactOutboundPort {
 
     @Autowired
     private ContactRepository contactRepository;
@@ -22,9 +20,9 @@ public class FindContactByEmailAdapter implements FindContactByEmailOutboundPort
 
     @Transactional
     @Override
-    public Optional<Contact> find(String email) {
-        Optional<ContactEntity> contactEntity = contactRepository.findByEmail(email);
+    public void delete(Contact contact) {
+        ContactEntity contactEntity = contactMapper.toEntity(contact);
 
-        return contactEntity.map(contact -> contactMapper.toDomain(contact));
+        contactRepository.delete(contactEntity);
     }
 }

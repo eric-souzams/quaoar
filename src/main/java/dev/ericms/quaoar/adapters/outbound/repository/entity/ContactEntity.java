@@ -146,8 +146,8 @@ public class ContactEntity {
         return topicEntities;
     }
 
-    public void setTopics(List<TopicEntity> topicEntities) {
-        this.topicEntities = topicEntities;
+    public void addTopics(TopicEntity topic) {
+        this.topicEntities.add(topic);
     }
 
 }

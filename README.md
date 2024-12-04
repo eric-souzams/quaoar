@@ -15,11 +15,12 @@
 
 
 ## Features
-- [ ] Future...
+- [ ] On future...
 
 ## Pending
-- [x] Support AWS SQS messaging active option
-- [x] Support AWS SES to send e-mails
+- [ ] Support AWS SQS messaging active option
+- [ ] Support AWS SES to send e-mails
+- [ ] Support integration ID
 
 ## Setup
 
@@ -50,7 +51,7 @@ delete-user.q
 ```
 
 ```json
-subscribe-to-topicEntity.q
+subscribeToTopicOutbound-to-topicEntity.q
 
 {
     "email": "eric@eric.dev",

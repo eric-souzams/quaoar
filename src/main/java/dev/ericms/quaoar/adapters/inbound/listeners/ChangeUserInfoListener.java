@@ -3,9 +3,9 @@ package dev.ericms.quaoar.adapters.inbound.listeners;
 import dev.ericms.quaoar.application.core.domain.Contact;
 import dev.ericms.quaoar.application.core.dto.ChangeUserInfoDto;
 import dev.ericms.quaoar.application.core.exception.BusinessException;
-import dev.ericms.quaoar.application.ports.inbound.CheckIfExistsContactEmailInboundPort;
-import dev.ericms.quaoar.application.ports.inbound.FindContactByEmailInboundPort;
-import dev.ericms.quaoar.application.ports.inbound.SaveContactInboundPort;
+import dev.ericms.quaoar.application.ports.inbound.contact.CheckIfExistsContactEmailInboundPort;
+import dev.ericms.quaoar.application.ports.inbound.contact.FindContactByEmailInboundPort;
+import dev.ericms.quaoar.application.ports.inbound.contact.SaveContactInboundPort;
 import dev.ericms.quaoar.infrastructure.events.event.ChangeUserInfoEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,11 +38,11 @@ public class ChangeUserInfoListener {
             if (checkIfExistsContactEmailInboundPort.check(payload.getEmail())) {
                 //if exists, update
                 Contact contact = findContactByEmailInboundPort.find(payload.getEmail());
-                saveContactInboundPort.save(createOrUpdateContract(payload, contact));
+                saveContactInboundPort.save(createOrUpdateContractBuilder(payload, contact));
                 logger.info("Updated contact from e-mail address: {}", payload.getEmail());
             } else {
                 //if not exists, create
-                saveContactInboundPort.save(createOrUpdateContract(payload, new Contact()));
+                saveContactInboundPort.save(createOrUpdateContractBuilder(payload, new Contact()));
                 logger.info("Created contact from e-mail address: {}", payload.getEmail());
             }
         } catch (BusinessException e) {
@@ -58,7 +58,7 @@ public class ChangeUserInfoListener {
         throw new BusinessException(INVALID_OBJECT.getMessage());
     }
 
-    private Contact createOrUpdateContract(ChangeUserInfoDto payload, Contact contact) {
+    private Contact createOrUpdateContractBuilder(ChangeUserInfoDto payload, Contact contact) {
         contact.setEmail(payload.getEmail());
         contact.setName(payload.getName());
         contact.setIntegrationId(payload.getIntegrationId());

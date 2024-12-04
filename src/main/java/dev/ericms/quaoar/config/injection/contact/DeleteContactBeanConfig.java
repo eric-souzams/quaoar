@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.config.injection.contact;
 
-import dev.ericms.quaoar.adapters.outbound.adapter.DeleteContactAdapter;
+import dev.ericms.quaoar.adapters.outbound.adapter.contact.DeleteContactAdapter;
 import dev.ericms.quaoar.application.core.usecase.contact.DeleteContactUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -19,13 +19,10 @@ public class TopicEntity {
     private UUID id;
 
     @Column(name = "name", length = 150, nullable = false)
-    private String title;
+    private String name;
 
     @Column(name = "is_active", length = 150, nullable = false)
     private Boolean active;
-
-    @Column(name = "integration_id", length = 150, nullable = false)
-    private String integrationId;
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -40,12 +37,11 @@ public class TopicEntity {
     @ManyToMany(mappedBy = "topicEntities")
     private List<ContactEntity> contactEntities;
 
-    public TopicEntity(UUID id, String title, Boolean active, String integrationId, LocalDateTime createdAt,
+    public TopicEntity(UUID id, String name, Boolean active, LocalDateTime createdAt,
                        LocalDateTime updatedAt, List<ContactEntity> contactEntities) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.active = active;
-        this.integrationId = integrationId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.contactEntities = contactEntities;
@@ -62,12 +58,12 @@ public class TopicEntity {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getActive() {
@@ -76,14 +72,6 @@ public class TopicEntity {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public String getIntegrationId() {
-        return integrationId;
-    }
-
-    public void setIntegrationId(String integrationId) {
-        this.integrationId = integrationId;
     }
 
     public LocalDateTime getCreatedAt() {

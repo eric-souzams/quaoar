@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.application.ports.outbound;
+package dev.ericms.quaoar.application.ports.outbound.events;
 
 import dev.ericms.quaoar.application.core.events.interfaces.DomainEvent;
 

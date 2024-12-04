@@ -1,8 +1,8 @@
 package dev.ericms.quaoar.application.core.usecase.contact;
 
 import dev.ericms.quaoar.application.core.domain.Contact;
-import dev.ericms.quaoar.application.ports.inbound.SaveContactInboundPort;
-import dev.ericms.quaoar.application.ports.outbound.SaveContactOutboundPort;
+import dev.ericms.quaoar.application.ports.inbound.contact.SaveContactInboundPort;
+import dev.ericms.quaoar.application.ports.outbound.contact.SaveContactOutboundPort;
 
 public class SaveContactUseCase implements SaveContactInboundPort {
 

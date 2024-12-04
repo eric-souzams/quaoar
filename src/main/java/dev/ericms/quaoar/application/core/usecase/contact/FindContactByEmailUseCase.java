@@ -2,8 +2,8 @@ package dev.ericms.quaoar.application.core.usecase.contact;
 
 import dev.ericms.quaoar.application.core.domain.Contact;
 import dev.ericms.quaoar.application.core.exception.BusinessException;
-import dev.ericms.quaoar.application.ports.inbound.FindContactByEmailInboundPort;
-import dev.ericms.quaoar.application.ports.outbound.FindContactByEmailOutboundPort;
+import dev.ericms.quaoar.application.ports.inbound.contact.FindContactByEmailInboundPort;
+import dev.ericms.quaoar.application.ports.outbound.contact.FindContactByEmailOutboundPort;
 
 import static dev.ericms.quaoar.application.core.utils.Constants.EMAIL_ADDRESS_NOT_FOUND;
 

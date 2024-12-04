@@ -1,6 +1,7 @@
 package dev.ericms.quaoar.application.core.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,11 +9,9 @@ public class Topic {
 
     private UUID id;
 
-    private String title;
+    private String name;
 
     private Boolean active;
-
-    private String integrationId;
 
     private LocalDateTime createdAt;
 
@@ -20,18 +19,18 @@ public class Topic {
 
     private List<Contact> contacts;
 
-    public Topic(UUID id, String title, Boolean active, String integrationId, LocalDateTime createdAt,
+    public Topic(UUID id, String name, Boolean active, LocalDateTime createdAt,
                  LocalDateTime updatedAt, List<Contact> contacts) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.active = active;
-        this.integrationId = integrationId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.contacts = contacts;
     }
 
     public Topic() {
+        this.contacts = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -42,12 +41,12 @@ public class Topic {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getActive() {
@@ -56,14 +55,6 @@ public class Topic {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public String getIntegrationId() {
-        return integrationId;
-    }
-
-    public void setIntegrationId(String integrationId) {
-        this.integrationId = integrationId;
     }
 
     public LocalDateTime getCreatedAt() {

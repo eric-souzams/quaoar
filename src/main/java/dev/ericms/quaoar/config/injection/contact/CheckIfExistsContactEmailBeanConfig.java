@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.config.injection.contact;
 
-import dev.ericms.quaoar.adapters.outbound.adapter.CheckIfExistsContactEmailAdapter;
+import dev.ericms.quaoar.adapters.outbound.adapter.contact.CheckIfExistsContactEmailAdapter;
 import dev.ericms.quaoar.application.core.usecase.contact.CheckIfExistsContactEmailUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

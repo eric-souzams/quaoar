@@ -1,7 +1,7 @@
 package dev.ericms.quaoar.application.core.usecase.contact;
 
-import dev.ericms.quaoar.application.ports.inbound.CheckIfExistsContactEmailInboundPort;
-import dev.ericms.quaoar.application.ports.outbound.CheckIfExistsContactEmailOutboundPort;
+import dev.ericms.quaoar.application.ports.inbound.contact.CheckIfExistsContactEmailInboundPort;
+import dev.ericms.quaoar.application.ports.outbound.contact.CheckIfExistsContactEmailOutboundPort;
 
 public class CheckIfExistsContactEmailUseCase implements CheckIfExistsContactEmailInboundPort {
 
