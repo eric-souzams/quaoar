@@ -15,5 +15,10 @@ public class SubscribeToTopicDomainEvent implements DomainEvent {
         return subscribeToTopicDto;
     }
 
-
+    @Override
+    public String toString() {
+        return "SubscribeToTopicDomainEvent{" +
+                "subscribeToTopicDto=" + subscribeToTopicDto +
+                '}';
+    }
 }

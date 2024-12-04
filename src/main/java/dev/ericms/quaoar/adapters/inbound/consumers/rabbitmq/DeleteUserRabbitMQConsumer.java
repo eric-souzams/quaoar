@@ -1,9 +1,9 @@
-package dev.ericms.quaoar.adapters.inbound.consumer.rabbitmq;
+package dev.ericms.quaoar.adapters.inbound.consumers.rabbitmq;
 
 import com.rabbitmq.client.Channel;
-import dev.ericms.quaoar.adapters.inbound.consumer.dto.SubscribeOrUnSubscribeToTopicPayload;
-import dev.ericms.quaoar.adapters.inbound.consumer.mapper.SubscribeOrUnSubscribeToTopicMapper;
-import dev.ericms.quaoar.application.core.events.SubscribeToTopicDomainEvent;
+import dev.ericms.quaoar.adapters.inbound.consumers.dto.DeleteUserPayload;
+import dev.ericms.quaoar.adapters.inbound.consumers.mapper.DeleteUserMapper;
+import dev.ericms.quaoar.application.core.events.DeleteUserDomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.events.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.config.conditional.MessagingRabbitMqCondition;
 import org.slf4j.Logger;
@@ -19,21 +19,21 @@ import java.io.IOException;
 
 @Component
 @Conditional(MessagingRabbitMqCondition.class)
-public class SubscribeToTopicRabbitMQConsumer {
+public class DeleteUserRabbitMQConsumer {
 
-    private static final Logger logger = LoggerFactory.getLogger(SubscribeToTopicRabbitMQConsumer.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeleteUserRabbitMQConsumer.class);
 
     @Autowired
     private EventPublisherOutboundPort eventPublisherOutboundPort;
 
     @Autowired
-    private SubscribeOrUnSubscribeToTopicMapper subscribeOrUnSubscribeToTopicMapper;
+    private DeleteUserMapper deleteUserMapper;
 
-    @RabbitListener(queues = {"${broker.consumer.queues.subscribe-topic}"}, containerFactory = "listenerConfig")
-    public void handler(SubscribeOrUnSubscribeToTopicPayload payload, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) throws IOException {
+    @RabbitListener(queues = {"${broker.consumer.queues.delete-user}"}, containerFactory = "listenerConfig")
+    public void handler(DeleteUserPayload payload, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) throws IOException {
         logger.info("Start processing message from payload -> {}", payload);
 
-        eventPublisherOutboundPort.publishEvent(new SubscribeToTopicDomainEvent(subscribeOrUnSubscribeToTopicMapper.toDto(payload)));
+        eventPublisherOutboundPort.publishEvent(new DeleteUserDomainEvent(deleteUserMapper.toDto(payload)));
 
         channel.basicAck(tag, false);
 

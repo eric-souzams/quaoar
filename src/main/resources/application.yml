@@ -17,7 +17,7 @@ spring:
       idle-timeout: 300000
       pool-name: ProductionQuaoarPool
   jpa:
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true

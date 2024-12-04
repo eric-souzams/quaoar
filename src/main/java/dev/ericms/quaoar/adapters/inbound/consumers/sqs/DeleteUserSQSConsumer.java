@@ -1,8 +1,8 @@
-package dev.ericms.quaoar.adapters.inbound.consumer.sqs;
+package dev.ericms.quaoar.adapters.inbound.consumers.sqs;
 
-import dev.ericms.quaoar.adapters.inbound.consumer.dto.ChangeUserInfoPayload;
-import dev.ericms.quaoar.adapters.inbound.consumer.mapper.ChangeUserInfoMapper;
-import dev.ericms.quaoar.application.core.events.ChangeUserInfoDomainEvent;
+import dev.ericms.quaoar.adapters.inbound.consumers.dto.DeleteUserPayload;
+import dev.ericms.quaoar.adapters.inbound.consumers.mapper.DeleteUserMapper;
+import dev.ericms.quaoar.application.core.events.DeleteUserDomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.events.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.config.conditional.MessagingSqsCondition;
 import org.slf4j.Logger;
@@ -14,21 +14,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Conditional(MessagingSqsCondition.class)
-public class ChangeUserInfoSQSConsumer {
+public class DeleteUserSQSConsumer {
 
-    private static final Logger logger = LoggerFactory.getLogger(ChangeUserInfoSQSConsumer.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeleteUserSQSConsumer.class);
 
     @Autowired
     private EventPublisherOutboundPort eventPublisherOutboundPort;
 
     @Autowired
-    private ChangeUserInfoMapper changeUserInfoMapper;
+    private DeleteUserMapper deleteUserMapper;
 
-    @JmsListener(destination = "${broker.consumer.queues.change-user}")
-    public void handler(ChangeUserInfoPayload payload) {
+    @JmsListener(destination = "${broker.consumer.queues.delete-user}")
+    public void handler(DeleteUserPayload payload) {
         logger.info("Start processing message from payload -> {}", payload);
 
-        eventPublisherOutboundPort.publishEvent(new ChangeUserInfoDomainEvent(changeUserInfoMapper.toDto(payload)));
+        eventPublisherOutboundPort.publishEvent(new DeleteUserDomainEvent(deleteUserMapper.toDto(payload)));
 
         logger.info("Ended to processing message");
     }

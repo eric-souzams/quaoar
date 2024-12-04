@@ -38,10 +38,14 @@ public class SubscribeToTopicListener {
             for (String topicName : payload.getTopics()) {
                 if (checkIfExistsTopicInboundPort.check(topicName)) {
                     //if exists, include in topic
+                    logger.info("Subscribing contact {} to topic: {}", payload.getEmail(), topicName);
                     subscribeToTopicInbound.subscribe(topicName, payload.getEmail());
                 } else {
                     //if not exists, create topic and include in topic
+                    logger.info("Saving new topic: {}", topicName);
                     Topic topic = saveTopicInboundPort.save(createTopicBuilder(topicName, new Topic()));
+
+                    logger.info("Subscribing contact {} to topic: {}", payload.getEmail(), topic.getName());
                     subscribeToTopicInbound.subscribe(topic.getName(), payload.getEmail());
                 }
             }

@@ -7,6 +7,7 @@ import dev.ericms.quaoar.application.core.domain.Topic;
 import dev.ericms.quaoar.application.ports.outbound.topic.FindTopicByNameOutboundPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class FindTopicByNameAdapter implements FindTopicByNameOutboundPort {
     private TopicMapper topicMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Topic> find(String topic) {
         Optional<TopicEntity> topicEntity = topicRepository.findByName(topic);
 

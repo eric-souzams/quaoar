@@ -8,6 +8,7 @@ import dev.ericms.quaoar.application.core.exception.BusinessException;
 import dev.ericms.quaoar.application.ports.outbound.topic.SubscribeToTopicOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import static dev.ericms.quaoar.application.core.utils.Constants.EMAIL_ADDRESS_NOT_FOUND;
 import static dev.ericms.quaoar.application.core.utils.Constants.TOPIC_NOT_FOUND;
@@ -22,6 +23,7 @@ public class SubscribeToTopicAdapter implements SubscribeToTopicOutbound {
     private TopicRepository topicRepository;
 
     @Override
+    @Transactional
     public void subscribe(String topic, String email) {
         ContactEntity contactEntity = getContactEntity(email);
         TopicEntity topicEntity = getTopicEntity(topic);

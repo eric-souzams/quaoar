@@ -56,10 +56,10 @@ subscribeToTopicOutbound-to-topicEntity.q
 {
     "email": "eric@eric.dev",
     "integrationId": "H7f%7$#fe1",
-    "topicEntities": {
+    "topics": [
       "PARTY",
       "UBER"
-    }
+    ]
 }
 ```
 
@@ -69,10 +69,10 @@ unsubscribe-from-topicEntities.q
 {
     "email": "eric@eric.dev",
     "integrationId": "H7f%7$#fe1",
-    "topicEntities": {
+    "topics": [
       "PARTY",
       "UBER"
-    }
+    ]
 }
 ```
 

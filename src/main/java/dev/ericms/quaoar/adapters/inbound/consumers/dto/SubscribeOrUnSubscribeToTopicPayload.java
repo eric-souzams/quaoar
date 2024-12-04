@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.adapters.inbound.consumer.dto;
+package dev.ericms.quaoar.adapters.inbound.consumers.dto;
 
 import java.util.List;
 
