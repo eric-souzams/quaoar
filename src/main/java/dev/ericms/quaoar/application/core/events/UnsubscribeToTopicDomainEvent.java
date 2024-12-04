@@ -15,5 +15,10 @@ public class UnsubscribeToTopicDomainEvent implements DomainEvent {
         return unsubscribeToTopicDto;
     }
 
-
+    @Override
+    public String toString() {
+        return "UnsubscribeToTopicDomainEvent{" +
+                "unsubscribeToTopicDto=" + unsubscribeToTopicDto +
+                '}';
+    }
 }

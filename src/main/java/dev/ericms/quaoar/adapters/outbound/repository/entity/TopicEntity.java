@@ -34,17 +34,17 @@ public class TopicEntity {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    @ManyToMany(mappedBy = "topicEntities")
-    private List<ContactEntity> contactEntities;
+    @ManyToMany(mappedBy = "topics")
+    private List<ContactEntity> contacts;
 
     public TopicEntity(UUID id, String name, Boolean active, LocalDateTime createdAt,
-                       LocalDateTime updatedAt, List<ContactEntity> contactEntities) {
+                       LocalDateTime updatedAt, List<ContactEntity> contacts) {
         this.id = id;
         this.name = name;
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.contactEntities = contactEntities;
+        this.contacts = contacts;
     }
 
     public TopicEntity() {
@@ -102,10 +102,10 @@ public class TopicEntity {
     }
 
     public List<ContactEntity> getContacts() {
-        return contactEntities;
+        return contacts;
     }
 
     public void setContacts(List<ContactEntity> contactEntities) {
-        this.contactEntities = contactEntities;
+        this.contacts = contactEntities;
     }
 }

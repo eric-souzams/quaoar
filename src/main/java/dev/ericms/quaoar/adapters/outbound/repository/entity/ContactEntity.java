@@ -49,10 +49,10 @@ public class ContactEntity {
             joinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id")
     )
-    private List<TopicEntity> topicEntities;
+    private List<TopicEntity> topics;
 
     public ContactEntity(UUID id, String name, String email, Boolean unsubscribed, Boolean blocked,
-                         String integrationId, LocalDateTime createdAt, LocalDateTime updatedAt, List<TopicEntity> topicEntities) {
+                         String integrationId, LocalDateTime createdAt, LocalDateTime updatedAt, List<TopicEntity> topics) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -61,7 +61,7 @@ public class ContactEntity {
         this.integrationId = integrationId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.topicEntities = topicEntities;
+        this.topics = topics;
     }
 
     public ContactEntity() {
@@ -143,11 +143,11 @@ public class ContactEntity {
     }
 
     public List<TopicEntity> getTopics() {
-        return topicEntities;
+        return topics;
     }
 
     public void addTopics(TopicEntity topic) {
-        this.topicEntities.add(topic);
+        this.topics.add(topic);
     }
 
 }
