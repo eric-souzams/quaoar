@@ -29,6 +29,14 @@ public class SubscribeToTopicAdapter implements SubscribeToTopicOutbound {
         TopicEntity topicEntity = getTopicEntity(topic);
 
         contactEntity.addTopics(topicEntity);
+
+        checkTotalSubscribedTopic(contactEntity);
+    }
+
+    private void checkTotalSubscribedTopic(ContactEntity contactEntity) {
+        if (contactEntity.getUnsubscribed() && !contactEntity.getTopics().isEmpty()) {
+            contactEntity.setUnsubscribed(false);
+        }
     }
 
     private TopicEntity getTopicEntity(String topic) {

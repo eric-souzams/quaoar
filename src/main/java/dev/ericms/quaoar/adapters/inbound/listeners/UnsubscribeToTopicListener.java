@@ -33,8 +33,10 @@ public class UnsubscribeToTopicListener {
             for (String topicName : payload.getTopics()) {
                 if (checkIfExistsTopicInboundPort.check(topicName)) {
                     //if exists, exclude contact from topic
-                    logger.info("Unsubscribing contact {} from topic: {}", payload.getEmail(), topicName);
+                    logger.info("Unsubscribing contact {} from topic {}", payload.getEmail(), topicName);
                     unsubscribeToTopicInbound.unsubscribe(topicName, payload.getEmail());
+                } else {
+                    logger.error("Error on unsubscribe contact {} from topic {}, topic not exists", payload.getEmail(), topicName);
                 }
             }
         } catch (BusinessException e) {

@@ -29,6 +29,8 @@ public class UnsubscribeToTopicAdapter implements UnsubscribeToTopicOutbound {
         TopicEntity topicEntity = getTopicEntity(topic);
 
         contactEntity.getTopics().remove(topicEntity);
+
+        checkTotalSubscribedTopic(contactEntity);
     }
 
     private TopicEntity getTopicEntity(String topic) {
@@ -39,5 +41,11 @@ public class UnsubscribeToTopicAdapter implements UnsubscribeToTopicOutbound {
     private ContactEntity getContactEntity(String email) {
         return contactRepository.findByEmail(email)
                 .orElseThrow(() -> new BusinessException(EMAIL_ADDRESS_NOT_FOUND.getMessage()));
+    }
+
+    private void checkTotalSubscribedTopic(ContactEntity contactEntity) {
+        if (contactEntity.getTopics().isEmpty()) {
+            contactEntity.setUnsubscribed(true);
+        }
     }
 }
