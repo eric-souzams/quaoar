@@ -1,21 +1,39 @@
-# data source
+server:
+  port: 8080
+
 spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: quaoar
   datasource:
     url: jdbc:h2:mem:test
     username: sa
     password:
     driverClassName: org.h2.Driver
+    hikari:
+      maximum-pool-size: 3000
+      minimum-idle: 5
+      idle-timeout: 300000
+      pool-name: ProductionQuaoarPool
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: create-drop
     show-sql: false
     properties:
       hibernate:
-        format_sql: false
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
 
 messaging:
-  active: ${ACTIVE_MESSAGING_SERVICE:RABBITMQ}
+  active: ${ACTIVE_MESSAGING_SERVICE:}
   rabbitmq:
     host: ${RABBIT_MQ_HOST:localhost}
     port: ${RABBIT_MQ_PORT:5672}
@@ -24,11 +42,11 @@ messaging:
     virtual-host: ${RABBIT_MQ_VIRTUAL_HOST:quaoar}
     connection-timeout: ${RABBIT_MQ_CONNECTION_TIMEOUT:300000}
   aws:
-    access: ${AWS_ACCESS_KEY:}
-    secret: ${AWS_SECRET_KEY:}
-    region: ${AWS_REGION:}
+    access: ${AWS_ACCESS_KEY:123}
+    secret: ${AWS_SECRET_KEY:123}
+    region: ${AWS_REGION:us-east-1}
     ses:
-      from: ${AWS_SES_FROM:}
+      from: ${AWS_SES_FROM:example@example.com}
 
 broker:
   consumer:
