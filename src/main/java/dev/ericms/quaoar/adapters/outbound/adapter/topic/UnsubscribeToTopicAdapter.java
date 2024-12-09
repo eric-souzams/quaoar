@@ -28,7 +28,7 @@ public class UnsubscribeToTopicAdapter implements UnsubscribeToTopicOutbound {
         ContactEntity contactEntity = getContactEntity(email);
         TopicEntity topicEntity = getTopicEntity(topic);
 
-        contactEntity.getTopics().remove(topicEntity);
+        contactRepository.removeTopicFromContact(contactEntity.getId(), topicEntity.getId());
 
         checkTotalSubscribedTopic(contactEntity);
     }

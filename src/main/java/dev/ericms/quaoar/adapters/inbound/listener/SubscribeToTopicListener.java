@@ -1,4 +1,4 @@
-package dev.ericms.quaoar.adapters.inbound.listeners;
+package dev.ericms.quaoar.adapters.inbound.listener;
 
 import dev.ericms.quaoar.application.core.domain.Topic;
 import dev.ericms.quaoar.application.core.dto.SubscribeOrUnSubscribeToTopicDto;

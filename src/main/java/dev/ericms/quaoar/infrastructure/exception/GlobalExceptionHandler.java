@@ -2,8 +2,6 @@ package dev.ericms.quaoar.infrastructure.exception;
 
 import dev.ericms.quaoar.application.core.exception.BusinessException;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -18,9 +16,6 @@ import static dev.ericms.quaoar.infrastructure.utils.BaseResponse.*;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-
-    @Autowired
-    private MessageSource messageSource;
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<Object> handlerBusinessException(BusinessException ex, HttpServletRequest request) {

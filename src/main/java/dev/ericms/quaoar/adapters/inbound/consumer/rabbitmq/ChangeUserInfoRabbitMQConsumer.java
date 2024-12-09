@@ -1,14 +1,13 @@
-package dev.ericms.quaoar.adapters.inbound.consumers.rabbitmq;
+package dev.ericms.quaoar.adapters.inbound.consumer.rabbitmq;
 
 import com.rabbitmq.client.Channel;
-import dev.ericms.quaoar.adapters.inbound.consumers.dto.ChangeUserInfoPayload;
-import dev.ericms.quaoar.adapters.inbound.consumers.mapper.ChangeUserInfoMapper;
+import dev.ericms.quaoar.adapters.inbound.consumer.dto.ChangeUserInfoPayload;
+import dev.ericms.quaoar.adapters.inbound.consumer.mapper.ChangeUserInfoMapper;
 import dev.ericms.quaoar.application.core.events.ChangeUserInfoDomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.events.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.config.conditional.MessagingRabbitMqCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@EnableRabbit
 @Component
 @Conditional(MessagingRabbitMqCondition.class)
 public class ChangeUserInfoRabbitMQConsumer {

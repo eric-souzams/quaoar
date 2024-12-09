@@ -1,8 +1,8 @@
-package dev.ericms.quaoar.adapters.inbound.consumers.rabbitmq;
+package dev.ericms.quaoar.adapters.inbound.consumer.rabbitmq;
 
 import com.rabbitmq.client.Channel;
-import dev.ericms.quaoar.adapters.inbound.consumers.dto.DeleteUserPayload;
-import dev.ericms.quaoar.adapters.inbound.consumers.mapper.DeleteUserMapper;
+import dev.ericms.quaoar.adapters.inbound.consumer.dto.DeleteUserPayload;
+import dev.ericms.quaoar.adapters.inbound.consumer.mapper.DeleteUserMapper;
 import dev.ericms.quaoar.application.core.events.DeleteUserDomainEvent;
 import dev.ericms.quaoar.application.ports.outbound.events.EventPublisherOutboundPort;
 import dev.ericms.quaoar.infrastructure.config.conditional.MessagingRabbitMqCondition;

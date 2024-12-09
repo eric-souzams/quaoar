@@ -1,7 +1,6 @@
 package dev.ericms.quaoar.adapters.outbound.repository;
 
 import dev.ericms.quaoar.adapters.outbound.repository.entity.ContactEntity;
-import dev.ericms.quaoar.adapters.outbound.repository.entity.TopicEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,8 +16,7 @@ public interface ContactRepository extends JpaRepository<ContactEntity, UUID> {
     boolean existsByEmail(String email);
 
     @Modifying
-    @Query("DELETE FROM ContactEntity c WHERE c.id = :contactId AND :topic IN (SELECT t FROM c.topics t WHERE t = :topic)")
-    void removeTopicFromContact(@Param("contactId") UUID contactId, @Param("topic") TopicEntity topic);
-
+    @Query(value = "DELETE FROM tb_contact_topics WHERE contact_id = :contactId AND topic_id = :topicId", nativeQuery = true)
+    void removeTopicFromContact(@Param("contactId") UUID contactId, @Param("topicId") UUID topicId);
 
 }
