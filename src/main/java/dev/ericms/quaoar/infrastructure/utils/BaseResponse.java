@@ -2,6 +2,7 @@ package dev.ericms.quaoar.infrastructure.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -51,6 +52,12 @@ public class BaseResponse {
         return ResponseEntity.status(status.value()).body(baseResponse);
     }
 
+    public static ResponseEntity<Object> createResponse(HttpStatus status, Page<Object> body) {
+        BaseResponse baseResponse = new BaseResponse(status, body);
+
+        return ResponseEntity.status(status.value()).body(baseResponse);
+    }
+
     public static ResponseEntity<Object> createResponse(HttpStatus status, String message) {
         BaseResponse baseResponse = new BaseResponse(status, message);
 
@@ -69,6 +76,14 @@ public class BaseResponse {
 
     public static ResponseEntity<Object> createdResponse() {
         return createResponse(HttpStatus.CREATED);
+    }
+
+    public static ResponseEntity<Object> okResponse(Page<Object> objectPage) {
+        return createResponse(HttpStatus.OK, objectPage);
+    }
+
+    public static ResponseEntity<Object> okResponse(Object object) {
+        return createResponse(HttpStatus.OK, object);
     }
 
     public static ResponseEntity<Object> okResponse(String message) {

@@ -17,6 +17,9 @@ public class TemplateEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -36,8 +39,9 @@ public class TemplateEntity {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    public TemplateEntity(UUID id, String title, String content, Boolean active, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public TemplateEntity(UUID id, String name, String title, String content, Boolean active, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
+        this.name = name;
         this.title = title;
         this.content = content;
         this.active = active;
@@ -107,4 +111,11 @@ public class TemplateEntity {
         this.updatedAt = updatedAt;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

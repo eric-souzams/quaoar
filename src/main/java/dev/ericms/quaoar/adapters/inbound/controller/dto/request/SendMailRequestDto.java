@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-public class SendMailRequest {
+public class SendMailRequestDto {
 
     @NotBlank(message = "Field 'email' can't be empty")
     @Email(message = "Email should be valid")
@@ -23,9 +23,9 @@ public class SendMailRequest {
     @NotEmpty(message = "Field list 'recipients' can't be empty")
     private List<@Email(message = "Email should be valid") String> recipients;
 
-    private String template_id;
+    private String template;
 
-    private String topic;
+    private List<String> topic;
 
     private List<MultipartFile> attachments;
 
@@ -61,19 +61,19 @@ public class SendMailRequest {
         this.recipients = recipients;
     }
 
-    public String getTemplate_id() {
-        return template_id;
+    public String getTemplate() {
+        return template;
     }
 
-    public void setTemplate_id(String template_id) {
-        this.template_id = template_id;
+    public void setTemplate(String template) {
+        this.template = template;
     }
 
-    public String getTopic() {
+    public List<String> getTopic() {
         return topic;
     }
 
-    public void setTopic(String topic) {
+    public void setTopic(List<String> topic) {
         this.topic = topic;
     }
 

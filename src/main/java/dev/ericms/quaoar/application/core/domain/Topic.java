@@ -30,6 +30,7 @@ public class Topic {
     }
 
     public Topic() {
+        this.active = true;
         this.contacts = new ArrayList<>();
     }
 

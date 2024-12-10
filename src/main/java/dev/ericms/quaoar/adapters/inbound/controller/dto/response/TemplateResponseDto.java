@@ -1,9 +1,9 @@
-package dev.ericms.quaoar.application.core.domain;
+package dev.ericms.quaoar.adapters.inbound.controller.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Template {
+public class TemplateResponseDto {
 
     private UUID id;
 
@@ -19,7 +19,10 @@ public class Template {
 
     private LocalDateTime updatedAt;
 
-    public Template(UUID id, String name, String title, String content, Boolean active, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public TemplateResponseDto() {
+    }
+
+    public TemplateResponseDto(UUID id, String name, String title, String content, Boolean active, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.title = title;
@@ -27,18 +30,6 @@ public class Template {
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-    }
-
-    public Template() {
-        this.active = true;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -63,6 +54,14 @@ public class Template {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public LocalDateTime getCreatedAt() {

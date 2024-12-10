@@ -39,7 +39,7 @@ public class Contact {
     }
 
     public Contact() {
-        this.unsubscribed = Boolean.TRUE;
+        this.unsubscribed = true;
         this.topics = new ArrayList<>();
     }
 
