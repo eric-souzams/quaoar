@@ -2,20 +2,19 @@ package dev.ericms.quaoar.application.core.usecase.template;
 
 import dev.ericms.quaoar.application.core.domain.Template;
 import dev.ericms.quaoar.application.ports.inbound.template.FindTemplateByIdInboundPort;
+import dev.ericms.quaoar.application.ports.inbound.template.SaveTemplateInboundPort;
 import dev.ericms.quaoar.application.ports.inbound.template.UpdateTemplateInboundPort;
-import dev.ericms.quaoar.application.ports.outbound.template.UpdateTemplateOutboundPort;
 
 import java.util.UUID;
 
 public class UpdateTemplateUseCase implements UpdateTemplateInboundPort {
 
-    private final UpdateTemplateOutboundPort updateTemplateOutboundPort;
+    private final SaveTemplateInboundPort saveTemplateInboundPort;
 
     private final FindTemplateByIdInboundPort findTemplateByIdInboundPort;
 
-    public UpdateTemplateUseCase(UpdateTemplateOutboundPort updateTemplateOutboundPort,
-                                 FindTemplateByIdInboundPort findTemplateByIdInboundPort) {
-        this.updateTemplateOutboundPort = updateTemplateOutboundPort;
+    public UpdateTemplateUseCase(SaveTemplateInboundPort saveTemplateInboundPort, FindTemplateByIdInboundPort findTemplateByIdInboundPort) {
+        this.saveTemplateInboundPort = saveTemplateInboundPort;
         this.findTemplateByIdInboundPort = findTemplateByIdInboundPort;
     }
 
@@ -25,7 +24,7 @@ public class UpdateTemplateUseCase implements UpdateTemplateInboundPort {
 
         updateData(template, result);
 
-        updateTemplateOutboundPort.update(result);
+        saveTemplateInboundPort.save(result);
     }
 
     private void updateData(Template payloadRequest, Template target) {

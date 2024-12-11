@@ -1,9 +1,9 @@
 package dev.ericms.quaoar.application.ports.outbound.template;
 
-import java.util.UUID;
+import dev.ericms.quaoar.application.core.domain.Template;
 
 public interface DeleteTemplateOutboundPort {
 
-    void delete(UUID templateId);
+    void delete(Template template);
 
 }

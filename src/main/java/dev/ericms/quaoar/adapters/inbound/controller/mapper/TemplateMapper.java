@@ -24,6 +24,8 @@ public interface TemplateMapper {
     @Mapping(target = "updatedAt", ignore = true)
     Template toDomain(UpdateTemplateRequestDto updateTemplateRequestDto);
 
+    TemplateEntity toEntity(Template template);
+
     TemplateResponseDto toResponseDto(Template template);
 
 }

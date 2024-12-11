@@ -20,8 +20,8 @@ public class FindContactByEmailAdapter implements FindContactByEmailOutboundPort
     @Autowired
     private ContactMapper contactMapper;
 
-    @Transactional
     @Override
+    @Transactional(readOnly = true)
     public Optional<Contact> find(String email) {
         Optional<ContactEntity> contactEntity = contactRepository.findByEmail(email);
 

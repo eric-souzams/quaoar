@@ -18,8 +18,8 @@ public class DeleteContactAdapter implements DeleteContactOutboundPort {
     @Autowired
     private ContactMapper contactMapper;
 
-    @Transactional
     @Override
+    @Transactional
     public void delete(Contact contact) {
         ContactEntity contactEntity = contactMapper.toEntity(contact);
 

@@ -13,7 +13,7 @@ public class SaveTemplateUseCase implements SaveTemplateInboundPort {
     }
 
     @Override
-    public Template save(Template template) {
-        return saveTemplateOutboundPort.save(template);
+    public void save(Template template) {
+        saveTemplateOutboundPort.save(template);
     }
 }
