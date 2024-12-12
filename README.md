@@ -114,15 +114,15 @@ PUT -> /v1/templates/{templateID} -> Update template
 }
 ```
 
-```text
+```json
 GET -> /v1/templates/{templateID} -> Find template by id
 ```
 
-```text
+```json
 GET -> /v1/templates -> Find all templates
 ```
 
-```text
+```json
 DELETE -> /v1/templates/{templateID} -> Delete template by id
 ```
 
