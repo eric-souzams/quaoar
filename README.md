@@ -76,6 +76,56 @@ unsubscribe-from-topicEntities.q
 }
 ```
 
+### Endpoints
+
+#### Mail
+```json
+POST -> /v1/mail/send -> Send mail
+
+{
+    "replyTo": "test@google.com",
+    "subject": "Your password has been reset!",
+    "body": "Click here to access now.",
+    "recipients": [
+        "test@google.com"
+    ]
+}
+```
+
+#### Template
+```json
+POST -> /v1/templates -> Create template
+
+{
+    "name": "RECOVER_PASSWORD",
+    "title": "Quaoar - Recovery Password",
+    "content": "Click here do change your password."
+}
+```
+
+```json
+PUT -> /v1/templates/{templateID} -> Update template
+
+{
+    "name": "RECOVER_PASSWORD",
+    "title": "Quaoar - Recovery Password",
+    "content": "Click here do change your password.",
+    "active": true
+}
+```
+
+```text
+GET -> /v1/templates/{templateID} -> Find template by id
+```
+
+```text
+GET -> /v1/templates -> Find all templates
+```
+
+```text
+DELETE -> /v1/templates/{templateID} -> Delete template by id
+```
+
 ### Environment Variables
 ```text
 | Variable       | Description               |
