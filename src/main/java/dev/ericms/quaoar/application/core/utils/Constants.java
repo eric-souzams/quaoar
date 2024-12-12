@@ -4,6 +4,7 @@ public enum Constants {
 
     MAIL_SENT_WITH_SUCCESS("Email sent with successfully!"),
     INVALID_OBJECT("Invalid attributes."),
+    INVALID_MESSAGE("Invalid message."),
     EMAIL_ADDRESS_NOT_FOUND("Email not found."),
     TOPIC_NOT_FOUND("Topic not found."),
     TEMPLATE_NOT_FOUND("Template not found."),
