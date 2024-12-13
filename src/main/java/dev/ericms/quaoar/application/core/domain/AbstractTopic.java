@@ -2,7 +2,7 @@ package dev.ericms.quaoar.application.core.domain;
 
 import java.util.UUID;
 
-public class ContactTopic {
+public class AbstractTopic {
 
     private UUID id;
 
@@ -10,13 +10,13 @@ public class ContactTopic {
 
     private Boolean active;
 
-    public ContactTopic(UUID id, String title, Boolean active) {
+    public AbstractTopic(UUID id, String title, Boolean active) {
         this.id = id;
         this.title = title;
         this.active = active;
     }
 
-    public ContactTopic() {
+    public AbstractTopic() {
     }
 
     public UUID getId() {

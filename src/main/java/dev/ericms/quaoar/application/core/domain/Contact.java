@@ -23,10 +23,10 @@ public class Contact {
 
     private LocalDateTime updatedAt;
 
-    private List<ContactTopic> topics;
+    private List<AbstractTopic> topics;
 
     public Contact(UUID id, String name, String email, Boolean unsubscribed, Boolean blocked,
-                   String integrationId, LocalDateTime createdAt, LocalDateTime updatedAt, List<ContactTopic> topics) {
+                   String integrationId, LocalDateTime createdAt, LocalDateTime updatedAt, List<AbstractTopic> topics) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -107,11 +107,11 @@ public class Contact {
         this.updatedAt = updatedAt;
     }
 
-    public List<ContactTopic> getTopics() {
+    public List<AbstractTopic> getTopics() {
         return topics;
     }
 
-    public void setTopics(List<ContactTopic> topics) {
+    public void setTopics(List<AbstractTopic> topics) {
         this.topics = topics;
     }
 }

@@ -8,6 +8,7 @@ import dev.ericms.quaoar.adapters.outbound.repository.enums.MessageStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -35,11 +36,15 @@ public class MessageEntity {
 
     @ManyToOne
     @JoinColumn(name = "template_id", referencedColumnName = "id")
-    private TemplateEntity templateEntity;
+    private TemplateEntity template;
 
-    @ManyToOne
-    @JoinColumn(name = "topic_id", referencedColumnName = "id")
-    private TopicEntity topicEntity;
+    @ManyToMany
+    @JoinTable(
+            name = "tb_message_topics",
+            joinColumns = @JoinColumn(name = "message_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id")
+    )
+    private List<TopicEntity> topics;
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -55,16 +60,17 @@ public class MessageEntity {
     @Column(name = "status", nullable = false)
     private MessageStatus status;
 
-    public MessageEntity(UUID id, String subject, String content, String emailFrom, String recipientsTo, String recipientsCc,
-                         TemplateEntity templateEntity, TopicEntity topicEntity, LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status) {
+    public MessageEntity(UUID id, String subject, String content, String emailFrom, String recipientsTo,
+                         String recipientsCc, TemplateEntity template, List<TopicEntity> topics,
+                         LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status) {
         this.id = id;
         this.subject = subject;
         this.content = content;
         this.emailFrom = emailFrom;
         this.recipientsTo = recipientsTo;
         this.recipientsCc = recipientsCc;
-        this.templateEntity = templateEntity;
-        this.topicEntity = topicEntity;
+        this.template = template;
+        this.topics = topics;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.status = status;
@@ -109,19 +115,19 @@ public class MessageEntity {
     }
 
     public TemplateEntity getTemplate() {
-        return templateEntity;
+        return template;
     }
 
-    public void setTemplate(TemplateEntity templateEntity) {
-        this.templateEntity = templateEntity;
+    public void setTemplate(TemplateEntity template) {
+        this.template = template;
     }
 
-    public TopicEntity getTopic() {
-        return topicEntity;
+    public List<TopicEntity> getTopics() {
+        return topics;
     }
 
-    public void setTopic(TopicEntity topicEntity) {
-        this.topicEntity = topicEntity;
+    public void setTopics(List<TopicEntity> topics) {
+        this.topics = topics;
     }
 
     public LocalDateTime getCreatedAt() {

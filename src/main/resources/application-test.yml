@@ -47,6 +47,7 @@ messaging:
     region: ${AWS_REGION:us-east-1}
     ses:
       from: ${AWS_SES_FROM:example@example.com}
+      arn: ${AWS_SES_ARN:}
 
 broker:
   consumer:

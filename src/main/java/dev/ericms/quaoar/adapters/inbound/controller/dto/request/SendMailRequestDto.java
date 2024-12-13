@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 public class SendMailRequestDto {
 
@@ -17,15 +18,17 @@ public class SendMailRequestDto {
     @NotBlank(message = "Field 'subject' can't be empty")
     private String subject;
 
-    @NotBlank(message = "Field 'body' can't be empty")
-    private String body;
+    @NotBlank(message = "Field 'content' can't be empty")
+    private String content;
 
     @NotEmpty(message = "Field list 'recipients' can't be empty")
     private List<@Email(message = "Email should be valid") String> recipients;
 
     private String template;
 
-    private List<String> topic;
+    private Map<String, String> templateParams;
+
+    private List<String> topics;
 
     private List<MultipartFile> attachments;
 
@@ -45,12 +48,12 @@ public class SendMailRequestDto {
         this.subject = subject;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public List<String> getRecipients() {
@@ -69,12 +72,12 @@ public class SendMailRequestDto {
         this.template = template;
     }
 
-    public List<String> getTopic() {
-        return topic;
+    public List<String> getTopics() {
+        return topics;
     }
 
-    public void setTopic(List<String> topic) {
-        this.topic = topic;
+    public void setTopics(List<String> topics) {
+        this.topics = topics;
     }
 
     public List<MultipartFile> getAttachments() {
@@ -83,5 +86,13 @@ public class SendMailRequestDto {
 
     public void setAttachments(List<MultipartFile> attachments) {
         this.attachments = attachments;
+    }
+
+    public Map<String, String> getTemplateParams() {
+        return templateParams;
+    }
+
+    public void setTemplateParams(Map<String, String> templateParams) {
+        this.templateParams = templateParams;
     }
 }

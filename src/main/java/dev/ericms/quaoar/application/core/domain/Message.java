@@ -3,6 +3,7 @@ package dev.ericms.quaoar.application.core.domain;
 import dev.ericms.quaoar.adapters.outbound.repository.enums.MessageStatus;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class Message {
@@ -21,7 +22,7 @@ public class Message {
 
     private Template template;
 
-    private Topic topic;
+    private List<AbstractTopic> topics;
 
     private LocalDateTime createdAt;
 
@@ -29,8 +30,9 @@ public class Message {
 
     private MessageStatus status;
 
-    public Message(UUID id, String subject, String content, String emailFrom, String recipientsTo, String recipientsCc,
-                   Template template, Topic topic, LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status) {
+    public Message(UUID id, String subject, String content, String emailFrom, String recipientsTo,
+                   String recipientsCc, Template template, List<AbstractTopic> topics, LocalDateTime createdAt,
+                   LocalDateTime updatedAt, MessageStatus status) {
         this.id = id;
         this.subject = subject;
         this.content = content;
@@ -38,7 +40,7 @@ public class Message {
         this.recipientsTo = recipientsTo;
         this.recipientsCc = recipientsCc;
         this.template = template;
-        this.topic = topic;
+        this.topics = topics;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.status = status;
@@ -79,12 +81,12 @@ public class Message {
         this.template = template;
     }
 
-    public Topic getTopic() {
-        return topic;
+    public List<AbstractTopic> getTopics() {
+        return topics;
     }
 
-    public void setTopic(Topic topic) {
-        this.topic = topic;
+    public void setTopics(List<AbstractTopic> topics) {
+        this.topics = topics;
     }
 
     public LocalDateTime getCreatedAt() {
