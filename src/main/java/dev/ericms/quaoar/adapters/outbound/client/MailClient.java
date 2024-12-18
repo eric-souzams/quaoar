@@ -41,7 +41,7 @@ public class MailClient implements MailClientOutboundPort {
           MimeMessage mail = buildMailMessage(sendMailRequestDto);
 
           if (!isEmpty(sendMailRequestDto.getTopics()))
-               sendMailRequestDto.getRecipients().addAll(getRecipientsFromTopics(sendMailRequestDto.getTopics()));
+               sendMailRequestDto.getRecipientsTo().addAll(getRecipientsFromTopics(sendMailRequestDto.getTopics()));
 
      }
 

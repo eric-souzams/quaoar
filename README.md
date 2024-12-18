@@ -85,9 +85,12 @@ POST -> /v1/mail/send -> Send mail
 {
     "replyTo": "test@google.com",
     "subject": "Your password has been reset!",
-    "body": "Click here to access now.",
-    "recipients": [
+    "content": "Click here to access now.",
+    "recipientsTo": [
         "test@google.com"
+    ],
+    "recipientsCc": [
+      "dev@google.com"
     ]
 }
 ```

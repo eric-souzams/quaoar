@@ -16,6 +16,10 @@ public class AbstractTopic {
         this.active = active;
     }
 
+    public AbstractTopic(String title) {
+        this.title = title;
+    }
+
     public AbstractTopic() {
     }
 

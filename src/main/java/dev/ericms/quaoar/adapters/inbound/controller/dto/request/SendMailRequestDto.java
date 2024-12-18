@@ -1,14 +1,21 @@
 package dev.ericms.quaoar.adapters.inbound.controller.dto.request;
 
+import dev.ericms.quaoar.application.core.domain.AbstractTopic;
+import dev.ericms.quaoar.application.core.domain.Message;
+import dev.ericms.quaoar.config.annotations.annotation.AtLeastOneNotEmpty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-import jakarta.validation.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@AtLeastOneNotEmpty(
+        fields = {"recipientsTo", "recipientsCc"},
+        message = "At least one of 'recipientsTo' or 'recipientsCc' must be filled"
+)
 public class SendMailRequestDto {
 
     @NotBlank(message = "Field 'email' can't be empty")
@@ -21,8 +28,9 @@ public class SendMailRequestDto {
     @NotBlank(message = "Field 'content' can't be empty")
     private String content;
 
-    @NotEmpty(message = "Field list 'recipients' can't be empty")
-    private List<@Email(message = "Email should be valid") String> recipients;
+    private List<@Email(message = "Email should be valid") String> recipientsTo = new ArrayList<>();
+
+    private List<@Email(message = "Email should be valid") String> recipientsCc = new ArrayList<>();
 
     private String template;
 
@@ -56,12 +64,12 @@ public class SendMailRequestDto {
         this.content = content;
     }
 
-    public List<String> getRecipients() {
-        return recipients;
+    public List<String> getRecipientsTo() {
+        return recipientsTo;
     }
 
-    public void setRecipients(List<String> recipients) {
-        this.recipients = recipients;
+    public void setRecipientsTo(List<String> recipientsTo) {
+        this.recipientsTo = recipientsTo;
     }
 
     public String getTemplate() {
@@ -95,4 +103,25 @@ public class SendMailRequestDto {
     public void setTemplateParams(Map<String, String> templateParams) {
         this.templateParams = templateParams;
     }
+
+    public List<String> getRecipientsCc() {
+        return recipientsCc;
+    }
+
+    public void setRecipientsCc(List<String> recipientsCc) {
+        this.recipientsCc = recipientsCc;
+    }
+
+    public Message convertToMessage() {
+        Message message = new Message();
+
+        message.setSubject(this.subject);
+        message.setContent(this.content);
+        message.setTopics(this.topics.stream().map(AbstractTopic::new).toList());
+        message.setRecipientsTo(this.recipientsTo.toString());
+        message.setRecipientsCc(this.recipientsCc.toString());
+
+        return message;
+    }
+
 }
