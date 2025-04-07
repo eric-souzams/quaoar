@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.adapters.outbound.adapter.contact;
 
-import dev.ericms.quaoar.adapters.outbound.mapper.ContactMapper;
+import dev.ericms.quaoar.adapters.outbound.mapper.ContactOutboundMapper;
 import dev.ericms.quaoar.adapters.outbound.repository.ContactRepository;
 import dev.ericms.quaoar.adapters.outbound.repository.entity.ContactEntity;
 import dev.ericms.quaoar.application.core.domain.Contact;
@@ -16,12 +16,12 @@ public class DeleteContactAdapter implements DeleteContactOutboundPort {
     private ContactRepository contactRepository;
 
     @Autowired
-    private ContactMapper contactMapper;
+    private ContactOutboundMapper contactOutboundMapper;
 
     @Override
     @Transactional
     public void delete(Contact contact) {
-        ContactEntity contactEntity = contactMapper.toEntity(contact);
+        ContactEntity contactEntity = contactOutboundMapper.toEntity(contact);
 
         contactRepository.delete(contactEntity);
     }

@@ -119,10 +119,40 @@ PUT -> /v1/templates/{templateID} -> Update template
 
 ```json
 GET -> /v1/templates/{templateID} -> Find template by id
+
+{
+  "id": "11b9c66b-3ae3-461d-b2f6-8f42bdbad8b8",
+  "name": "RECOVER_PASSWORD",
+  "title": "Quaoar - Recovery Password",
+  "content": "Click here do change your password.",
+  "active": true,
+  "createdAt": "2025-04-07T11:10:14.484742",
+  "updatedAt": "2025-04-07T11:10:14.484742"
+}
 ```
 
 ```json
 GET -> /v1/templates -> Find all templates
+
+{
+  "content": [
+    {
+      "id": "11b9c66b-3ae3-461d-b2f6-8f42bdbad8b8",
+      "name": "RECOVER_PASSWORD",
+      "title": "Quaoar - Recovery Password",
+      "content": "Click here do change your password.",
+      "active": true,
+      "createdAt": "2025-04-07T11:10:14.484742",
+      "updatedAt": "2025-04-07T11:10:14.484742"
+    }
+  ],
+  "pageNumber": 0,
+  "pageSize": 10,
+  "totalElements": 3,
+  "totalPages": 1,
+  "isLast": true,
+  "last": true
+}
 ```
 
 ```json

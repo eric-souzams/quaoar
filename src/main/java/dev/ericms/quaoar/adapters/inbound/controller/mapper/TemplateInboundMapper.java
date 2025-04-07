@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface TemplateMapper {
+public interface TemplateInboundMapper {
 
     Template toDomain(TemplateEntity templateEntity);
 

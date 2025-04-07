@@ -5,7 +5,7 @@ import dev.ericms.quaoar.application.core.domain.Contact;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ContactMapper {
+public interface ContactOutboundMapper {
 
     ContactEntity toEntity(Contact contact);
 

@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.adapters.outbound.adapter.contact;
 
-import dev.ericms.quaoar.adapters.outbound.mapper.ContactMapper;
+import dev.ericms.quaoar.adapters.outbound.mapper.ContactOutboundMapper;
 import dev.ericms.quaoar.adapters.outbound.repository.ContactRepository;
 import dev.ericms.quaoar.adapters.outbound.repository.entity.ContactEntity;
 import dev.ericms.quaoar.application.core.domain.Contact;
@@ -18,13 +18,13 @@ public class FindContactByEmailAdapter implements FindContactByEmailOutboundPort
     private ContactRepository contactRepository;
 
     @Autowired
-    private ContactMapper contactMapper;
+    private ContactOutboundMapper contactOutboundMapper;
 
     @Override
     @Transactional(readOnly = true)
     public Optional<Contact> find(String email) {
         Optional<ContactEntity> contactEntity = contactRepository.findByEmail(email);
 
-        return contactEntity.map(contact -> contactMapper.toDomain(contact));
+        return contactEntity.map(contact -> contactOutboundMapper.toDomain(contact));
     }
 }

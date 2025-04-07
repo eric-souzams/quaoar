@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.adapters.outbound.adapter.template;
 
-import dev.ericms.quaoar.adapters.inbound.controller.mapper.TemplateMapper;
+import dev.ericms.quaoar.adapters.outbound.mapper.TemplateOutboundMapper;
 import dev.ericms.quaoar.adapters.outbound.repository.TemplateRepository;
 import dev.ericms.quaoar.adapters.outbound.repository.entity.TemplateEntity;
 import dev.ericms.quaoar.application.core.domain.Template;
@@ -19,13 +19,13 @@ public class FindTemplateByIdAdapter implements FindTemplateByIdOutboundPort {
     private TemplateRepository templateRepository;
 
     @Autowired
-    private TemplateMapper templateMapper;
+    private TemplateOutboundMapper templateOutboundMapper;
 
     @Override
     @Transactional(readOnly = true)
     public Optional<Template> find(UUID templateId) {
         Optional<TemplateEntity> templateEntity = templateRepository.findById(templateId);
 
-        return templateEntity.map(template -> templateMapper.toDomain(template));
+        return templateEntity.map(template -> templateOutboundMapper.toDomain(template));
     }
 }

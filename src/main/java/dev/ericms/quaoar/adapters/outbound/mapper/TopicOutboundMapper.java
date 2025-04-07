@@ -5,7 +5,7 @@ import dev.ericms.quaoar.application.core.domain.Topic;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface TopicMapper {
+public interface TopicOutboundMapper {
 
     TopicEntity toEntity(Topic topic);
 

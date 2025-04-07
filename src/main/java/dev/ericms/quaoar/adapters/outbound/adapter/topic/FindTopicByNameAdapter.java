@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.adapters.outbound.adapter.topic;
 
-import dev.ericms.quaoar.adapters.outbound.mapper.TopicMapper;
+import dev.ericms.quaoar.adapters.outbound.mapper.TopicOutboundMapper;
 import dev.ericms.quaoar.adapters.outbound.repository.TopicRepository;
 import dev.ericms.quaoar.adapters.outbound.repository.entity.TopicEntity;
 import dev.ericms.quaoar.application.core.domain.Topic;
@@ -18,13 +18,13 @@ public class FindTopicByNameAdapter implements FindTopicByNameOutboundPort {
     private TopicRepository topicRepository;
 
     @Autowired
-    private TopicMapper topicMapper;
+    private TopicOutboundMapper topicOutboundMapper;
 
     @Override
     @Transactional(readOnly = true)
     public Optional<Topic> find(String topic) {
         Optional<TopicEntity> topicEntity = topicRepository.findByName(topic);
 
-        return topicEntity.map(entity -> topicMapper.toDomain(entity));
+        return topicEntity.map(entity -> topicOutboundMapper.toDomain(entity));
     }
 }

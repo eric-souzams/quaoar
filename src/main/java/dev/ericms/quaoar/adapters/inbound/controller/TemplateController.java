@@ -2,16 +2,13 @@ package dev.ericms.quaoar.adapters.inbound.controller;
 
 import dev.ericms.quaoar.adapters.inbound.controller.dto.request.CreateTemplateRequestDto;
 import dev.ericms.quaoar.adapters.inbound.controller.dto.request.UpdateTemplateRequestDto;
-import dev.ericms.quaoar.adapters.inbound.controller.mapper.TemplateMapper;
+import dev.ericms.quaoar.adapters.inbound.controller.mapper.TemplateInboundMapper;
+import dev.ericms.quaoar.application.core.dto.PageResponseDTO;
+import dev.ericms.quaoar.application.core.enums.SortDirection;
 import dev.ericms.quaoar.application.core.domain.Template;
-import dev.ericms.quaoar.application.ports.inbound.template.DeleteTemplateInboundPort;
-import dev.ericms.quaoar.application.ports.inbound.template.FindTemplateByIdInboundPort;
-import dev.ericms.quaoar.application.ports.inbound.template.SaveTemplateInboundPort;
-import dev.ericms.quaoar.application.ports.inbound.template.UpdateTemplateInboundPort;
+import dev.ericms.quaoar.application.ports.inbound.template.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +23,7 @@ import static dev.ericms.quaoar.infrastructure.utils.BaseResponse.*;
 public class TemplateController {
 
     @Autowired
-    private TemplateMapper templateMapper;
+    private TemplateInboundMapper templateInboundMapper;
 
     @Autowired
     private SaveTemplateInboundPort saveTemplateInboundPort;
@@ -40,12 +37,15 @@ public class TemplateController {
     @Autowired
     private FindTemplateByIdInboundPort findTemplateByIdInboundPort;
 
+    @Autowired
+    private FindAllTemplateInboundPort findAllTemplateInboundPort;
+
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
     public ResponseEntity<Object> create(@Valid @RequestBody CreateTemplateRequestDto payload) {
-        saveTemplateInboundPort.save(templateMapper.toDomain(payload));
+        saveTemplateInboundPort.save(templateInboundMapper.toDomain(payload));
 
         return createdResponse(TEMPLATE_CREATED_WITH_SUCCESS.getMessage());
     }
@@ -57,14 +57,20 @@ public class TemplateController {
     public ResponseEntity<Object> find(@PathVariable("templateId") UUID templateId) {
         Template template = findTemplateByIdInboundPort.find(templateId);
 
-        return okResponse(templateMapper.toResponseDto(template));
+        return okResponse(templateInboundMapper.toResponseDto(template));
     }
 
     @GetMapping(
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    public ResponseEntity<Page<Object>> findAll(Pageable pageable) {
-        return null;
+    public ResponseEntity<Object> findAll(
+            @RequestParam(required = false) SortDirection sort,
+            @RequestParam(defaultValue = "0", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int size
+    ) {
+        PageResponseDTO<Template> templates = findAllTemplateInboundPort.findAll(sort, page, size);
+
+        return okResponseBasic(templates);
     }
 
     @PutMapping(
@@ -74,7 +80,7 @@ public class TemplateController {
     )
     public ResponseEntity<Object> update(@Valid @RequestBody UpdateTemplateRequestDto payload,
                                          @PathVariable("templateId") UUID templateId) {
-        updateTemplateInboundPort.update(templateMapper.toDomain(payload), templateId);
+        updateTemplateInboundPort.update(templateInboundMapper.toDomain(payload), templateId);
 
         return okResponse(TEMPLATE_UPDATED_WITH_SUCCESS.getMessage());
     }

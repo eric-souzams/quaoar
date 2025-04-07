@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.adapters.outbound.adapter.topic;
 
-import dev.ericms.quaoar.adapters.outbound.mapper.TopicMapper;
+import dev.ericms.quaoar.adapters.outbound.mapper.TopicOutboundMapper;
 import dev.ericms.quaoar.adapters.outbound.repository.TopicRepository;
 import dev.ericms.quaoar.adapters.outbound.repository.entity.TopicEntity;
 import dev.ericms.quaoar.application.core.domain.Topic;
@@ -16,13 +16,13 @@ public class SaveTopicAdapter implements SaveTopicOutboundPort {
     private TopicRepository topicRepository;
 
     @Autowired
-    private TopicMapper topicMapper;
+    private TopicOutboundMapper topicOutboundMapper;
 
     @Override
     @Transactional
     public Topic save(Topic topic) {
-        TopicEntity topicEntity = topicMapper.toEntity(topic);
+        TopicEntity topicEntity = topicOutboundMapper.toEntity(topic);
 
-        return topicMapper.toDomain(topicRepository.save(topicEntity));
+        return topicOutboundMapper.toDomain(topicRepository.save(topicEntity));
     }
 }

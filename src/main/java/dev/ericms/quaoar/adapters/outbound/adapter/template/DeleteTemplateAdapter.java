@@ -1,6 +1,6 @@
 package dev.ericms.quaoar.adapters.outbound.adapter.template;
 
-import dev.ericms.quaoar.adapters.inbound.controller.mapper.TemplateMapper;
+import dev.ericms.quaoar.adapters.outbound.mapper.TemplateOutboundMapper;
 import dev.ericms.quaoar.adapters.outbound.repository.TemplateRepository;
 import dev.ericms.quaoar.adapters.outbound.repository.entity.TemplateEntity;
 import dev.ericms.quaoar.application.core.domain.Template;
@@ -16,12 +16,12 @@ public class DeleteTemplateAdapter implements DeleteTemplateOutboundPort {
     private TemplateRepository templateRepository;
 
     @Autowired
-    private TemplateMapper templateMapper;
+    private TemplateOutboundMapper templateOutboundMapper;
 
     @Override
     @Transactional
     public void delete(Template template) {
-        TemplateEntity templateEntity = templateMapper.toEntity(template);
+        TemplateEntity templateEntity = templateOutboundMapper.toEntity(template);
 
         templateRepository.delete(templateEntity);
     }

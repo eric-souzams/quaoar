@@ -86,6 +86,10 @@ public class BaseResponse {
         return createResponse(HttpStatus.OK, object);
     }
 
+    public static ResponseEntity<Object> okResponseBasic(Object object) {
+        return ResponseEntity.ok(object);
+    }
+
     public static ResponseEntity<Object> okResponse(String message) {
         return createResponse(HttpStatus.OK, message);
     }
