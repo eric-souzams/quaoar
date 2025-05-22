@@ -8,6 +8,7 @@ public enum MessageStatus {
     BOUNCE,
     COMPLAINT,
     REJECT,
-    SENT;
+    SENT,
+    FAILURE;
 
 }

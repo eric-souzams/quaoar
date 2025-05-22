@@ -8,6 +8,7 @@ public enum Constants {
     EMAIL_ADDRESS_NOT_FOUND("Email not found."),
     TOPIC_NOT_FOUND("Topic not found."),
     TEMPLATE_NOT_FOUND("Template not found."),
+    TEMPLATE_OR_PARAMS_INVALID("Template or parameters are invalid."),
     TEMPLATE_CREATED_WITH_SUCCESS("Template created with success."),
     TEMPLATE_UPDATED_WITH_SUCCESS("Template updated with success."),
     TEMPLATE_DELETED_WITH_SUCCESS("Template deleted with success.");

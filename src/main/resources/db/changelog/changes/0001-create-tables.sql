@@ -25,12 +25,14 @@ create table if not exists tb_messages (
     content TEXT not null,
     created_at timestamp(6) not null,
     email_from varchar(255) not null,
-    recipients_to varchar(255) not null,
-    recipients_cc varchar(255) not null,
-    status varchar(255) not null check (status in ('DELIVER','OPEN','CLICK','BOUNCE','COMPLAINT','REJECT','SENT')),
+    recipients_to varchar(255) null,
+    recipients_cc varchar(255) null,
+    recipients_bcc varchar(255) null,
+    status varchar(255) not null check (status in ('DELIVER','OPEN','CLICK','BOUNCE','COMPLAINT','REJECT','SENT', 'FAILURE')),
     subject varchar(255) not null,
     updated_at timestamp(6) not null,
     template_id uuid,
+    message_id varchar(255),
     primary key (id)
 );
 

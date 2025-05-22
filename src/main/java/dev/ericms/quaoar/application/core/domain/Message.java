@@ -20,6 +20,8 @@ public class Message {
 
     private String recipientsCc;
 
+    private String recipientsBcc;
+
     private Template template;
 
     private List<AbstractTopic> topics;
@@ -30,20 +32,24 @@ public class Message {
 
     private MessageStatus status;
 
+    private String messageId;
+
     public Message(UUID id, String subject, String content, String emailFrom, String recipientsTo,
-                   String recipientsCc, Template template, List<AbstractTopic> topics, LocalDateTime createdAt,
-                   LocalDateTime updatedAt, MessageStatus status) {
+                   String recipientsCc, String recipientsBcc, Template template, List<AbstractTopic> topics,
+                   LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status, String messageId) {
         this.id = id;
         this.subject = subject;
         this.content = content;
         this.emailFrom = emailFrom;
         this.recipientsTo = recipientsTo;
         this.recipientsCc = recipientsCc;
+        this.recipientsBcc = recipientsBcc;
         this.template = template;
         this.topics = topics;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.status = status;
+        this.messageId = messageId;
     }
 
     public Message() {
@@ -135,5 +141,21 @@ public class Message {
 
     public void setRecipientsCc(String recipientsCc) {
         this.recipientsCc = recipientsCc;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getRecipientsBcc() {
+        return recipientsBcc;
+    }
+
+    public void setRecipientsBcc(String recipientsBcc) {
+        this.recipientsBcc = recipientsBcc;
     }
 }

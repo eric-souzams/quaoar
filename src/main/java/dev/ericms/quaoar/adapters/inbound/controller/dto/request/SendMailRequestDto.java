@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 @AtLeastOneNotEmpty(
-        fields = {"recipientsTo", "recipientsCc"},
-        message = "At least one of 'recipientsTo' or 'recipientsCc' must be filled"
+        fields = {"recipientsTo", "recipientsCc", "recipientsBcc"},
+        message = "At least one of 'recipientsTo' or 'recipientsCc' or 'recipientsBcc' must be filled"
 )
 public class SendMailRequestDto {
 
@@ -31,6 +31,8 @@ public class SendMailRequestDto {
     private List<@Email(message = "Email should be valid") String> recipientsTo = new ArrayList<>();
 
     private List<@Email(message = "Email should be valid") String> recipientsCc = new ArrayList<>();
+
+    private List<@Email(message = "Email should be valid") String> recipientsBcc = new ArrayList<>();
 
     private String template;
 
@@ -112,6 +114,14 @@ public class SendMailRequestDto {
         this.recipientsCc = recipientsCc;
     }
 
+    public List<String> getRecipientsBcc() {
+        return recipientsBcc;
+    }
+
+    public void setRecipientsBcc(List<String> recipientsBcc) {
+        this.recipientsBcc = recipientsBcc;
+    }
+
     public Message convertToMessage() {
         Message message = new Message();
 
@@ -120,6 +130,7 @@ public class SendMailRequestDto {
         message.setTopics(this.topics.stream().map(AbstractTopic::new).toList());
         message.setRecipientsTo(this.recipientsTo.toString());
         message.setRecipientsCc(this.recipientsCc.toString());
+        message.setRecipientsBcc(this.recipientsBcc.toString());
 
         return message;
     }

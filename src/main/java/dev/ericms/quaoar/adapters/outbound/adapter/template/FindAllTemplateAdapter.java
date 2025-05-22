@@ -28,7 +28,7 @@ public class FindAllTemplateAdapter implements FindAllTemplateOutboundPort {
     @Transactional(readOnly = true)
     public PageResponseDTO<Template> findAll(SortDirection sort, int page, int size) {
         Sort.Direction direction = (sort != null) ? Sort.Direction.valueOf(sort.name()) : Sort.Direction.ASC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "title"));
 
         Page<TemplateEntity> result = templateRepository.findAll(pageable);
 

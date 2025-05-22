@@ -28,11 +28,14 @@ public class MessageEntity {
     @Column(name = "email_from", nullable = false)
     private String emailFrom;
 
-    @Column(name = "recipients_to", nullable = false)
+    @Column(name = "recipients_to", nullable = true)
     private String recipientsTo;
 
-    @Column(name = "recipients_cc", nullable = false)
+    @Column(name = "recipients_cc", nullable = true)
     private String recipientsCc;
+
+    @Column(name = "recipients_bcc", nullable = true)
+    private String recipientsBcc;
 
     @ManyToOne
     @JoinColumn(name = "template_id", referencedColumnName = "id")
@@ -60,20 +63,25 @@ public class MessageEntity {
     @Column(name = "status", nullable = false)
     private MessageStatus status;
 
+    @Column(name = "message_id", nullable = true)
+    private String messageId;
+
     public MessageEntity(UUID id, String subject, String content, String emailFrom, String recipientsTo,
-                         String recipientsCc, TemplateEntity template, List<TopicEntity> topics,
-                         LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status) {
+                         String recipientsCc, String recipientsBcc, TemplateEntity template, List<TopicEntity> topics,
+                         LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status, String messageId) {
         this.id = id;
         this.subject = subject;
         this.content = content;
         this.emailFrom = emailFrom;
         this.recipientsTo = recipientsTo;
         this.recipientsCc = recipientsCc;
+        this.recipientsBcc = recipientsBcc;
         this.template = template;
         this.topics = topics;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.status = status;
+        this.messageId = messageId;
     }
 
     public MessageEntity() {
@@ -176,5 +184,21 @@ public class MessageEntity {
 
     public void setRecipientsCc(String recipientsCc) {
         this.recipientsCc = recipientsCc;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getRecipientsBcc() {
+        return recipientsBcc;
+    }
+
+    public void setRecipientsBcc(String recipientsBcc) {
+        this.recipientsBcc = recipientsBcc;
     }
 }

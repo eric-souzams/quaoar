@@ -19,7 +19,8 @@ public class Template {
 
     private LocalDateTime updatedAt;
 
-    public Template(UUID id, String name, String title, String content, Boolean active, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Template(UUID id, String name, String title, String content,
+                    Boolean active, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.title = title;
@@ -31,6 +32,10 @@ public class Template {
 
     public Template() {
         this.active = true;
+    }
+
+    public Template(String name) {
+        this.name = name;
     }
 
     public UUID getId() {

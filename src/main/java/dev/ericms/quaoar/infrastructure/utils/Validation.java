@@ -1,6 +1,7 @@
 package dev.ericms.quaoar.infrastructure.utils;
 
 import java.util.Collection;
+import java.util.Map;
 
 public class Validation {
 
@@ -18,6 +19,10 @@ public class Validation {
 
     public static boolean isEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();
+    }
+
+    public static boolean isEmpty(Map<?, ?> map) {
+        return map == null || map.isEmpty();
     }
 
     public static boolean isValidEmail(String email) {
