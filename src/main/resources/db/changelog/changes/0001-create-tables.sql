@@ -3,11 +3,6 @@ create table if not exists tb_contact_topics (
     topic_id uuid not null
 );
 
-create table if not exists tb_message_topics (
-    message_id uuid not null,
-    topic_id uuid not null
-);
-
 create table if not exists tb_contacts (
     id uuid not null,
     is_blocked boolean not null,
@@ -25,14 +20,12 @@ create table if not exists tb_messages (
     content TEXT not null,
     created_at timestamp(6) not null,
     email_from varchar(255) not null,
-    recipients_to varchar(255) null,
-    recipients_cc varchar(255) null,
-    recipients_bcc varchar(255) null,
+    recipients_to TEXT null,
+    recipients_cc TEXT null,
+    recipients_bcc TEXT null,
     status varchar(255) not null check (status in ('DELIVER','OPEN','CLICK','BOUNCE','COMPLAINT','REJECT','SENT', 'FAILURE')),
     subject varchar(255) not null,
     updated_at timestamp(6) not null,
-    template_id uuid,
-    message_id varchar(255),
     primary key (id)
 );
 
@@ -56,6 +49,14 @@ create table if not exists tb_topics (
     unique (name)
 );
 
+CREATE TABLE if not exists tb_message_topic (
+    message_id uuid NOT NULL,
+    topic_id uuid NOT NULL,
+    PRIMARY KEY (message_id, topic_id),
+    FOREIGN KEY (message_id) REFERENCES tb_messages(id),
+    FOREIGN KEY (topic_id) REFERENCES tb_topics(id)
+);
+
 alter table if exists tb_contact_topics
    add constraint FKaio1hd42tilia3dq2495dhnbo
    foreign key (topic_id)
@@ -65,16 +66,6 @@ alter table if exists tb_contact_topics
    add constraint FK7jrvgbrhoncdwvgjvabkkihaa
    foreign key (contact_id)
    references tb_contacts;
-
-alter table if exists tb_message_topics
-   add constraint FKtio1hd42tilia3dq2495dhuyt
-   foreign key (topic_id)
-   references tb_topics;
-
-alter table if exists tb_message_topics
-   add constraint FK2jrvgbrhoncdwvgjvabkfreaj
-   foreign key (message_id)
-   references tb_messages;
 
 alter table if exists tb_messages
    add constraint FKn711dj0qo5ti3ls3jiemeadrs

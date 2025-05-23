@@ -1,6 +1,7 @@
 package dev.ericms.quaoar.adapters.outbound.client;
 
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
+import com.amazonaws.services.simpleemail.model.AmazonSimpleEmailServiceException;
 import com.amazonaws.services.simpleemail.model.RawMessage;
 import com.amazonaws.services.simpleemail.model.SendRawEmailRequest;
 import com.amazonaws.services.simpleemail.model.SendRawEmailResult;
@@ -74,7 +75,13 @@ public class MailClient implements MailClientOutboundPort {
                MimeMessage mail = buildMailMessage(sendMailRequestDto);
                SendRawEmailRequest rawEmailRequest = convertToRawMessageRequest(mail);
 
-               SendRawEmailResult result = mailClient.sendRawEmail(rawEmailRequest);
+               SendRawEmailResult result = null;
+
+               try {
+                    result = mailClient.sendRawEmail(rawEmailRequest);
+               } catch (AmazonSimpleEmailServiceException exception) {
+                    logger.error("MC - Error sending raw email: {}", exception.getMessage());
+               }
 
                saveMessageLog(sendMailRequestDto, result, senderMailAddress);
           } catch (MessagingException | IOException exception) {
@@ -143,16 +150,17 @@ public class MailClient implements MailClientOutboundPort {
           wrapperPart.setContent(messageBody);
           completeMessage.addBodyPart(wrapperPart);
 
-          for (MultipartFile file : sendMailRequestDto.getAttachments()) {
-               if (!file.isEmpty()) {
-                    MimeBodyPart attachmentPart = new MimeBodyPart();
-                    attachmentPart.setFileName(MimeUtility.encodeText(isNotBlank(file.getOriginalFilename())
-                            ? file.getOriginalFilename() : UUID.randomUUID().toString(), "UTF-8", null));
-                    attachmentPart.setContent(file.getBytes(), file.getContentType());
-                    completeMessage.addBodyPart(attachmentPart);
+          if (!isEmpty(sendMailRequestDto.getAttachments())) {
+               for (MultipartFile file : sendMailRequestDto.getAttachments()) {
+                    if (!file.isEmpty()) {
+                         MimeBodyPart attachmentPart = new MimeBodyPart();
+                         attachmentPart.setFileName(MimeUtility.encodeText(isNotBlank(file.getOriginalFilename())
+                                 ? file.getOriginalFilename() : UUID.randomUUID().toString(), "UTF-8", null));
+                         attachmentPart.setContent(file.getBytes(), file.getContentType());
+                         completeMessage.addBodyPart(attachmentPart);
+                    }
                }
           }
-
 
           return completeMessage;
      }
@@ -192,8 +200,8 @@ public class MailClient implements MailClientOutboundPort {
 
           message.setEmailFrom(senderMailAddress);
           message.setTemplate(isNotBlank(sendMailRequestDto.getTemplate()) ? new Template(sendMailRequestDto.getTemplate()) : null);
-          message.setMessageId(isNotBlank(result.getMessageId()) ? result.getMessageId() : null);
-          message.setStatus(isNotBlank(result.getMessageId()) ? MessageStatus.DELIVER : MessageStatus.FAILURE);
+          message.setMessageId((result != null && isNotBlank(result.getMessageId())) ? result.getMessageId() : null);
+          message.setStatus((result != null && isNotBlank(result.getMessageId())) ? MessageStatus.DELIVER : MessageStatus.FAILURE);
 
           saveMessageInboundPort.save(message);
      }
