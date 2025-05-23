@@ -11,6 +11,7 @@ import dev.ericms.quaoar.application.core.domain.Message;
 import dev.ericms.quaoar.application.core.domain.Template;
 import dev.ericms.quaoar.application.core.domain.Topic;
 import dev.ericms.quaoar.application.core.exception.BusinessException;
+import dev.ericms.quaoar.application.ports.inbound.message.SaveMessageInboundPort;
 import dev.ericms.quaoar.application.ports.inbound.template.FindTemplateByNameInboundPort;
 import dev.ericms.quaoar.application.ports.inbound.topic.CheckIfExistsTopicInboundPort;
 import dev.ericms.quaoar.application.ports.inbound.topic.FindTopicByNameInboundPort;
@@ -50,6 +51,9 @@ public class MailClient implements MailClientOutboundPort {
 
      @Autowired
      private FindTemplateByNameInboundPort findTemplateByNameInboundPort;
+
+     @Autowired
+     private SaveMessageInboundPort saveMessageInboundPort;
 
      @Value("${messaging.aws.ses.from}")
      private String senderMailAddress;
@@ -102,7 +106,8 @@ public class MailClient implements MailClientOutboundPort {
           MimeMessage mail = new MimeMessage(session);
           mail.setSubject(sendMailRequestDto.getSubject(), "UTF-8");
           mail.setFrom(senderMailAddress);
-          mail.setReplyTo(getReplyTo(sendMailRequestDto));
+
+          if (isNotBlank(sendMailRequestDto.getReplyTo())) mail.setReplyTo(getReplyTo(sendMailRequestDto));
 
           if (!sendMailRequestDto.getRecipientsTo().isEmpty()) {
                mail.setRecipients(jakarta.mail.Message.RecipientType.TO,
@@ -118,7 +123,6 @@ public class MailClient implements MailClientOutboundPort {
                mail.setRecipients(jakarta.mail.Message.RecipientType.BCC,
                        InternetAddress.parse(String.join(",", sendMailRequestDto.getRecipientsBcc())));
           }
-
 
           MimeMultipart completeMessage = getMimeMultipart(sendMailRequestDto);
 
@@ -142,7 +146,8 @@ public class MailClient implements MailClientOutboundPort {
           for (MultipartFile file : sendMailRequestDto.getAttachments()) {
                if (!file.isEmpty()) {
                     MimeBodyPart attachmentPart = new MimeBodyPart();
-                    attachmentPart.setFileName(MimeUtility.encodeText(Objects.requireNonNull(file.getOriginalFilename()), "UTF-8", null));
+                    attachmentPart.setFileName(MimeUtility.encodeText(isNotBlank(file.getOriginalFilename())
+                            ? file.getOriginalFilename() : UUID.randomUUID().toString(), "UTF-8", null));
                     attachmentPart.setContent(file.getBytes(), file.getContentType());
                     completeMessage.addBodyPart(attachmentPart);
                }
@@ -181,7 +186,7 @@ public class MailClient implements MailClientOutboundPort {
           return null;
      }
 
-     @Transactional(readOnly = false)
+     @Transactional
      private void saveMessageLog(SendMailRequestDto sendMailRequestDto, SendRawEmailResult result, String senderMailAddress) {
           Message message = sendMailRequestDto.convertToMessage();
 
@@ -190,7 +195,7 @@ public class MailClient implements MailClientOutboundPort {
           message.setMessageId(isNotBlank(result.getMessageId()) ? result.getMessageId() : null);
           message.setStatus(isNotBlank(result.getMessageId()) ? MessageStatus.DELIVER : MessageStatus.FAILURE);
 
-          // create ports to save the message on database
+          saveMessageInboundPort.save(message);
      }
 
 }

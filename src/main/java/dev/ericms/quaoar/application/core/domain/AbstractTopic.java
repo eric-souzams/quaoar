@@ -6,18 +6,18 @@ public class AbstractTopic {
 
     private UUID id;
 
-    private String title;
+    private String name;
 
     private Boolean active;
 
-    public AbstractTopic(UUID id, String title, Boolean active) {
+    public AbstractTopic(UUID id, String name, Boolean active) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.active = active;
     }
 
-    public AbstractTopic(String title) {
-        this.title = title;
+    public AbstractTopic(String name) {
+        this.name = name;
     }
 
     public AbstractTopic() {
@@ -31,12 +31,12 @@ public class AbstractTopic {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getActive() {
