@@ -26,6 +26,7 @@ create table if not exists tb_messages (
     status varchar(255) not null check (status in ('DELIVER','OPEN','CLICK','BOUNCE','COMPLAINT','REJECT','SENT', 'FAILURE')),
     subject varchar(255) not null,
     updated_at timestamp(6) not null,
+    template_id uuid,
     primary key (id)
 );
 
