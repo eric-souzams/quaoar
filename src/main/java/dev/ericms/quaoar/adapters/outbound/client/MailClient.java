@@ -65,8 +65,9 @@ public class MailClient implements MailClientOutboundPort {
                if (!isEmpty(sendMailRequestDto.getTopics()))
                     sendMailRequestDto.getRecipientsTo().addAll(getRecipientsFromTopics(sendMailRequestDto.getTopics()));
 
+               Template template = null;
                if (isNotBlank(sendMailRequestDto.getTemplate())) {
-                    Template template = findTemplateByNameInboundPort.find(sendMailRequestDto.getTemplate());
+                    template = findTemplateByNameInboundPort.find(sendMailRequestDto.getTemplate());
 
                     String mailBody = processTemplate(template.getContent(), sendMailRequestDto.getTemplateParams());
                     sendMailRequestDto.setContent(mailBody);
@@ -83,7 +84,7 @@ public class MailClient implements MailClientOutboundPort {
                     logger.error("MC - Error sending raw email: {}", exception.getMessage());
                }
 
-               saveMessageLog(sendMailRequestDto, result, senderMailAddress);
+               saveMessageLog(sendMailRequestDto, result, senderMailAddress, template);
           } catch (MessagingException | IOException exception) {
                logger.error("MC - Error sending email: {}", exception.getMessage());
           }
@@ -195,11 +196,11 @@ public class MailClient implements MailClientOutboundPort {
      }
 
      @Transactional
-     private void saveMessageLog(SendMailRequestDto sendMailRequestDto, SendRawEmailResult result, String senderMailAddress) {
+     private void saveMessageLog(SendMailRequestDto sendMailRequestDto, SendRawEmailResult result, String senderMailAddress, Template template) {
           Message message = sendMailRequestDto.convertToMessage();
 
           message.setEmailFrom(senderMailAddress);
-          message.setTemplate(isNotBlank(sendMailRequestDto.getTemplate()) ? new Template(sendMailRequestDto.getTemplate()) : null);
+          message.setTemplate(template);
           message.setMessageId((result != null && isNotBlank(result.getMessageId())) ? result.getMessageId() : null);
           message.setStatus((result != null && isNotBlank(result.getMessageId())) ? MessageStatus.DELIVER : MessageStatus.FAILURE);
 

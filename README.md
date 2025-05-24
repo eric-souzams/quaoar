@@ -162,6 +162,40 @@ GET -> /v1/templates -> Find all templates
 DELETE -> /v1/templates/{templateID} -> Delete template by id
 ```
 
+#### Message
+```json
+GET -> /v1/messages/{messageID} -> Find message by id
+
+{
+    "status": "200",
+    "content": {
+        "id": "b86ffcea-3266-4121-825b-dda4f10bbad2",
+        "subject": "Your password has been reset!",
+        "content": "Click here do change your password.",
+        "emailFrom": "example@example.com",
+        "recipientsTo": [],
+        "recipientsCc": [
+            "test@google.com",
+            "test2@google.com"
+        ],
+        "recipientsBcc": [],
+        "template": {
+            "id": "5b8acb6b-3ff0-44ac-93d0-8a22962eed8a",
+            "name": "RECOVER_PASSWORD"
+        },
+        "topics": [
+            {
+                "id": "dc919ef4-ee62-455e-aa13-7b0eade933e9",
+                "name": "CLUB"
+            }
+        ],
+        "status": "FAILURE",
+        "createdAt": "2025-05-23T22:53:01.438291",
+        "updatedAt": "2025-05-23T22:53:01.438291"
+    }
+}
+```
+
 ### Environment Variables
 ```text
 | Variable       | Description               |

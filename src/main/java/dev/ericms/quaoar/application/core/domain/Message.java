@@ -24,7 +24,7 @@ public class Message {
 
     private Template template;
 
-    private List<AbstractTopic> topics;
+    private List<Topic> topics;
 
     private LocalDateTime createdAt;
 
@@ -35,7 +35,7 @@ public class Message {
     private String messageId;
 
     public Message(UUID id, String subject, String content, String emailFrom, String recipientsTo,
-                   String recipientsCc, String recipientsBcc, Template template, List<AbstractTopic> topics,
+                   String recipientsCc, String recipientsBcc, Template template, List<Topic> topics,
                    LocalDateTime createdAt, LocalDateTime updatedAt, MessageStatus status, String messageId) {
         this.id = id;
         this.subject = subject;
@@ -87,11 +87,11 @@ public class Message {
         this.template = template;
     }
 
-    public List<AbstractTopic> getTopics() {
+    public List<Topic> getTopics() {
         return topics;
     }
 
-    public void setTopics(List<AbstractTopic> topics) {
+    public void setTopics(List<Topic> topics) {
         this.topics = topics;
     }
 

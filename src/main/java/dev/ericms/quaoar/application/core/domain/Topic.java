@@ -34,6 +34,10 @@ public class Topic {
         this.contacts = new ArrayList<>();
     }
 
+    public Topic(String name) {
+        this.name = name;
+    }
+
     public UUID getId() {
         return id;
     }

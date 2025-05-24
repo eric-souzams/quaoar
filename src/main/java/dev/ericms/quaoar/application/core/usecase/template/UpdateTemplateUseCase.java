@@ -13,7 +13,8 @@ public class UpdateTemplateUseCase implements UpdateTemplateInboundPort {
 
     private final FindTemplateByIdInboundPort findTemplateByIdInboundPort;
 
-    public UpdateTemplateUseCase(SaveTemplateInboundPort saveTemplateInboundPort, FindTemplateByIdInboundPort findTemplateByIdInboundPort) {
+    public UpdateTemplateUseCase(SaveTemplateInboundPort saveTemplateInboundPort,
+                                 FindTemplateByIdInboundPort findTemplateByIdInboundPort) {
         this.saveTemplateInboundPort = saveTemplateInboundPort;
         this.findTemplateByIdInboundPort = findTemplateByIdInboundPort;
     }

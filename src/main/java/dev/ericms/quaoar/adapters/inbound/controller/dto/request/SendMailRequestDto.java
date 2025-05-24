@@ -1,7 +1,7 @@
 package dev.ericms.quaoar.adapters.inbound.controller.dto.request;
 
-import dev.ericms.quaoar.application.core.domain.AbstractTopic;
 import dev.ericms.quaoar.application.core.domain.Message;
+import dev.ericms.quaoar.application.core.domain.Topic;
 import dev.ericms.quaoar.config.annotations.annotation.AtLeastOneNotEmpty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -127,7 +127,7 @@ public class SendMailRequestDto {
 
         message.setSubject(this.subject);
         message.setContent(this.content);
-        message.setTopics(this.topics.stream().map(AbstractTopic::new).toList());
+        message.setTopics(this.topics.stream().map(Topic::new).toList());
         message.setRecipientsTo(this.recipientsTo.toString());
         message.setRecipientsCc(this.recipientsCc.toString());
         message.setRecipientsBcc(this.recipientsBcc.toString());
