@@ -196,6 +196,45 @@ GET -> /v1/messages/{messageID} -> Find message by id
 }
 ```
 
+```json
+GET -> /v1/messages -> Find all messages
+
+{
+  "content": [
+    {
+      "id": "b86ffcea-3266-4121-825b-dda4f10bbad2",
+      "subject": "Your password has been reset!",
+      "content": "Click here do change your password.",
+      "emailFrom": "example@example.com",
+      "recipientsTo": [],
+      "recipientsCc": [
+        "test@google.com",
+        "test2@google.com"
+      ],
+      "recipientsBcc": [],
+      "template": {
+        "id": "5b8acb6b-3ff0-44ac-93d0-8a22962eed8a",
+        "name": "RECOVER_PASSWORD"
+      },
+      "status": "FAILURE",
+      "createdAt": "2025-05-23T22:53:01.438291",
+      "updatedAt": "2025-05-23T22:53:01.438291"
+    }
+  ],
+  "pageNumber": 0,
+  "pageSize": 10,
+  "totalElements": 4,
+  "totalPages": 1,
+  "isLast": true,
+  "last": true
+}
+```
+
+```json
+DELETE -> /v1/messages/{messageID} -> Delete message by id
+```
+
+
 ### Environment Variables
 ```text
 | Variable       | Description               |

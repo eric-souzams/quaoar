@@ -1,9 +1,9 @@
 package dev.ericms.quaoar.application.ports.inbound.message;
 
-import dev.ericms.quaoar.application.core.domain.Message;
+import java.util.UUID;
 
 public interface DeleteMessageByIdInboundPort {
 
-    void delete(Message message);
+    void delete(UUID messageId);
 
 }

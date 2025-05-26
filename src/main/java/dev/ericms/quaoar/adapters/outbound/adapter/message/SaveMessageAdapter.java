@@ -5,6 +5,7 @@ import dev.ericms.quaoar.adapters.outbound.repository.MessageRepository;
 import dev.ericms.quaoar.adapters.outbound.repository.entity.MessageEntity;
 import dev.ericms.quaoar.application.core.domain.Message;
 import dev.ericms.quaoar.application.core.domain.Topic;
+import dev.ericms.quaoar.application.ports.outbound.message.AssociateMessageToTopicOutboundPort;
 import dev.ericms.quaoar.application.ports.outbound.message.SaveMessageOutboundPort;
 import dev.ericms.quaoar.infrastructure.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class SaveMessageAdapter implements SaveMessageOutboundPort {
     private MessageOutboundMapper messageOutboundMapper;
 
     @Autowired
-    private AssociateMessageToTopicAdapter associateMessageToTopicAdapter;
+    private AssociateMessageToTopicOutboundPort associateMessageToTopicOutboundPort;
 
     @Override
     @Transactional
@@ -41,7 +42,7 @@ public class SaveMessageAdapter implements SaveMessageOutboundPort {
                 .filter(name -> !name.isBlank())
                 .toList();
 
-        associateMessageToTopicAdapter.associate(response.getId(), topics);
+        associateMessageToTopicOutboundPort.associate(response.getId(), topics);
     }
 
     private void convertRecipientsStringToJson(MessageEntity messageEntity) {

@@ -2,11 +2,11 @@ package dev.ericms.quaoar.adapters.inbound.controller;
 
 import dev.ericms.quaoar.adapters.inbound.controller.mapper.MessageInboundMapper;
 import dev.ericms.quaoar.application.core.domain.Message;
-import dev.ericms.quaoar.application.core.domain.Template;
 import dev.ericms.quaoar.application.core.dto.PageResponseDTO;
 import dev.ericms.quaoar.application.core.enums.SortDirection;
+import dev.ericms.quaoar.application.ports.inbound.message.DeleteMessageByIdInboundPort;
+import dev.ericms.quaoar.application.ports.inbound.message.FindAllMessagesInboundPort;
 import dev.ericms.quaoar.application.ports.inbound.message.FindMessageByIdInboundPort;
-import dev.ericms.quaoar.application.ports.inbound.template.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +22,13 @@ import static dev.ericms.quaoar.infrastructure.utils.BaseResponse.*;
 public class MessageController {
 
     @Autowired
-    private DeleteTemplateInboundPort deleteTemplateInboundPort;
+    private DeleteMessageByIdInboundPort deleteMessageByIdInboundPort;
 
     @Autowired
     private FindMessageByIdInboundPort findMessageByIdInboundPort;
 
     @Autowired
-    private FindAllTemplateInboundPort findAllTemplateInboundPort;
+    private FindAllMessagesInboundPort findAllMessagesInboundPort;
 
     @Autowired
     private MessageInboundMapper messageInboundMapper;
@@ -51,9 +51,9 @@ public class MessageController {
             @RequestParam(defaultValue = "0", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int size
     ) {
-        PageResponseDTO<Template> templates = findAllTemplateInboundPort.findAll(sort, page, size);
+        PageResponseDTO<Message> messages = findAllMessagesInboundPort.findAll(sort, page, size);
 
-        return okResponseBasic(templates);
+        return okResponseBasic(messageInboundMapper.toPage(messages));
     }
 
     @DeleteMapping(
@@ -61,8 +61,8 @@ public class MessageController {
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
     public ResponseEntity<Object> delete(@PathVariable("messageId") UUID messageId) {
-        deleteTemplateInboundPort.delete(messageId);
+        deleteMessageByIdInboundPort.delete(messageId);
 
-        return deletedResponse(TEMPLATE_DELETED_WITH_SUCCESS.getMessage());
+        return deletedResponse(MESSAGE_DELETED_WITH_SUCCESS.getMessage());
     }
 }
