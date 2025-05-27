@@ -50,14 +50,6 @@ create table if not exists tb_topics (
     unique (name)
 );
 
-CREATE TABLE if not exists tb_message_topic (
-    message_id uuid NOT NULL,
-    topic_id uuid NOT NULL,
-    PRIMARY KEY (message_id, topic_id),
-    FOREIGN KEY (message_id) REFERENCES tb_messages(id),
-    FOREIGN KEY (topic_id) REFERENCES tb_topics(id)
-);
-
 alter table if exists tb_contact_topics
    add constraint FKaio1hd42tilia3dq2495dhnbo
    foreign key (topic_id)
