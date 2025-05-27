@@ -1,6 +1,40 @@
 version: '3.7'
 
 services:
+  app:
+    build:
+      context: .
+    container_name: quaoar
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=db_quaoar
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=root
+      - AWS_REGION=
+      - AWS_ACCESS_KEY=
+      - AWS_SECRET_KEY=
+      - AWS_SES_FROM=
+    depends_on:
+      - db
+      - rabbit-mq
+
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: db_quaoar
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
   rabbit-mq:
     image: rabbitmq:3.13.7-management
     container_name: rabbit-mq
@@ -15,6 +49,7 @@ services:
 
 volumes:
   rabbit_data:
+  postgres-data:
 
 networks:
   quaoar-network:
