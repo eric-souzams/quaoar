@@ -7,7 +7,7 @@ CREATE TABLE if not exists tb_message_topic (
 );
 
 ALTER TABLE tb_message_topic
-DROP CONSTRAINT tb_message_topic_message_id_fkey;
+DROP CONSTRAINT IF EXISTS tb_message_topic_message_id_fkey;
 
 ALTER TABLE tb_message_topic
 ADD CONSTRAINT tb_message_topic_message_id_fkey
