@@ -4,9 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public class UpdateTemplateRequestDto {
 
-    @NotBlank(message = "Field 'name' can't be empty")
-    private String name;
-
     @NotBlank(message = "Field 'title' can't be empty")
     private String title;
 
@@ -15,14 +12,6 @@ public class UpdateTemplateRequestDto {
 
     @NotBlank(message = "Field 'active' can't be empty")
     private Boolean active;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getTitle() {
         return title;

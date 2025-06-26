@@ -127,7 +127,7 @@ public class SendMailRequestDto {
 
         message.setSubject(this.subject);
         message.setContent(this.content);
-        message.setTopics(this.topics.stream().map(Topic::new).toList());
+        message.setTopics(topics == null ? null : this.topics.stream().map(Topic::new).toList());
         message.setRecipientsTo(this.recipientsTo.toString());
         message.setRecipientsCc(this.recipientsCc.toString());
         message.setRecipientsBcc(this.recipientsBcc.toString());

@@ -17,9 +17,11 @@ import dev.ericms.quaoar.application.ports.inbound.template.FindTemplateByNameIn
 import dev.ericms.quaoar.application.ports.inbound.topic.CheckIfExistsTopicInboundPort;
 import dev.ericms.quaoar.application.ports.inbound.topic.FindTopicByNameInboundPort;
 import dev.ericms.quaoar.application.ports.outbound.client.MailClientOutboundPort;
+import jakarta.activation.DataHandler;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Session;
 import jakarta.mail.internet.*;
+import jakarta.mail.util.ByteArrayDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +71,7 @@ public class MailClient implements MailClientOutboundPort {
                if (isNotBlank(sendMailRequestDto.getTemplate())) {
                     template = findTemplateByNameInboundPort.find(sendMailRequestDto.getTemplate());
 
-                    String mailBody = processTemplate(template.getContent(), sendMailRequestDto.getTemplateParams());
+                    String mailBody = processTemplate(template, sendMailRequestDto.getTemplateParams());
                     sendMailRequestDto.setContent(mailBody);
                }
 
@@ -82,11 +84,13 @@ public class MailClient implements MailClientOutboundPort {
                     result = mailClient.sendRawEmail(rawEmailRequest);
                } catch (AmazonSimpleEmailServiceException exception) {
                     logger.error("MC - Error sending raw email: {}", exception.getMessage());
+                    throw new BusinessException("MC-1 - Error sending email");
                }
 
                saveMessageLog(sendMailRequestDto, result, senderMailAddress, template);
           } catch (MessagingException | IOException exception) {
                logger.error("MC - Error sending email: {}", exception.getMessage());
+               throw new BusinessException("MC-2 - Error sending email");
           }
      }
 
@@ -157,7 +161,7 @@ public class MailClient implements MailClientOutboundPort {
                          MimeBodyPart attachmentPart = new MimeBodyPart();
                          attachmentPart.setFileName(MimeUtility.encodeText(isNotBlank(file.getOriginalFilename())
                                  ? file.getOriginalFilename() : UUID.randomUUID().toString(), "UTF-8", null));
-                         attachmentPart.setContent(file.getBytes(), file.getContentType());
+                         attachmentPart.setDataHandler(new DataHandler(new ByteArrayDataSource(file.getBytes(), file.getContentType())));
                          completeMessage.addBodyPart(attachmentPart);
                     }
                }
@@ -170,17 +174,17 @@ public class MailClient implements MailClientOutboundPort {
           return new InternetAddress[]{ new InternetAddress(sendMailRequestDto.getReplyTo()) };
      }
 
-     private String processTemplate(String template, Map<String, String> templateParams) {
+     private String processTemplate(Template template, Map<String, String> templateParams) {
           if (template == null || templateParams == null) {
                throw new BusinessException(TEMPLATE_OR_PARAMS_INVALID.getMessage());
           }
 
           for (Map.Entry<String, String> entry : templateParams.entrySet()) {
                String placeholder = "{{" + entry.getKey() + "}}";
-               template = template.replace(placeholder, entry.getValue());
+               template.setContent(template.getContent().replace(placeholder, entry.getValue()));
           }
 
-          return template;
+          return template.getContent();
      }
 
      private SendRawEmailRequest convertToRawMessageRequest(MimeMessage mail) {
@@ -191,8 +195,8 @@ public class MailClient implements MailClientOutboundPort {
                return new SendRawEmailRequest(rawMessage);
           } catch (IOException | MessagingException exception) {
                logger.error("MC - Failed to convert to rawRequest: {}", exception.getMessage());
+               throw new BusinessException("MC-3 - Error sending email");
           }
-          return null;
      }
 
      @Transactional
